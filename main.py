@@ -1,8 +1,8 @@
 import pygame
 from vector import *
 from selectionScreen import SelectionScreen
-RESOLUTION = vec(400,200)
-SCALE = 2
+RESOLUTION = vec(500,350)
+SCALE =2
 UPSCALED = RESOLUTION * SCALE
 
 
