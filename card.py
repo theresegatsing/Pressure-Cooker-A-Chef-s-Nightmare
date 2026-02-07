@@ -15,4 +15,5 @@ class Card(object):
             self.drawable.image, (CARD_WIDTH, CARD_HEIGHT)
         )
         self.points = points
+        self.image_path = image_path
     

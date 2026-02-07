@@ -7,6 +7,7 @@ from card import Card
 import random 
 from vector import vec
 from game import Game
+from ingreDistr import IngredientDistribution
 
 SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 350
@@ -75,7 +76,7 @@ class SelectionScreen(object):
             mouse_pos = vec(*event.pos) // SCALE
             for card in self.selectedCards:
                 if card.drawable.getCollisionRect().collidepoint(mouse_pos):
-                    game = Game(card.points)
+                    game = Game(card.image_path, card.points)
                     game.run()
         
        
