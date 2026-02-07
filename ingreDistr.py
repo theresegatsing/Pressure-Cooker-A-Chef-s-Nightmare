@@ -7,7 +7,7 @@ class IngredientDistribution(object):
     def __init__(self, imageCard):
         self.imageCard = imageCard
 
-        self.allMeals = ["burger", "hot dog", "ramen"]
+        self.allMeals = ["burger", "hotdog", "ramen"]
 
         self.mealPath = ""
 
@@ -19,4 +19,7 @@ class IngredientDistribution(object):
 
 
     def run(self):
-        pass
+        if self.mealPath == "":
+            print("No valid meal found in image card.")
+            return
+        print(f"Ingredient Distribution for {self.mealPath}")

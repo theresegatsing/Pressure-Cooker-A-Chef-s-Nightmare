@@ -23,7 +23,6 @@ class Game(object):
             pygame.display.flip()
 
             IngredientDistribution(self.image_path).run()
-            print(f"path: {self.image_path}")
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
