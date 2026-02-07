@@ -27,17 +27,13 @@ class SelectionScreen(object):
         self.background.image = pygame.transform.smoothscale( self.background.image, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
         self.allCards = [
-            Card("burger card.png", 
-                 "A burger is a popular meal that originated in Germany, specifically in the city of Hamburg. "
-                "It was inspired by the Hamburg steak and later became widely known after being introduced in the United States." , 
+            Card("burgerCard.png", 
                 2100),
         
-            Card("hotdog card.png", 
-                 "A hot dog is a popular meal that originated in Germany, specifically from Frankfurt and Vienna. It was inspired by traditional German sausages (frankfurters and wieners) and later became widely known after being introduced in the United States" , 
+            Card("hotdog ccard.png", 
                  2000),
             
-            Card("ramen card.png",
-                 "Ramen is a popular noodle dish that originated in Japan. It was inspired by Chinese wheat noodles and later evolved into a staple of Japanese cuisine, becoming widely known around the world.",
+            Card("ramen ccard.png",
                  2300)
         ]
 
@@ -69,39 +65,10 @@ class SelectionScreen(object):
         for card in self.selectedCards:
             card.drawable.draw(surface)
 
-            text_y = card.drawable.position[1] +  CARD_HEIGHT // 2
-            text_x = card.drawable.position[0] + 5
-
-            self.render_multiline_text(
-                surface,
-                card.description,
-                font,
-                (0, 0, 0),
-                (text_x, text_y),
-                CARD_WIDTH - 10
-            )
-
+           
     
     def handleEvent(self, event):
         
         pass
 
-    def render_multiline_text(self, surface, text, font, color, pos, max_width):
-        words = text.split(' ')
-        lines = []
-        line = ''
-
-        for word in words:
-            test_line = line + word + ' '
-            if font.size(test_line)[0] <= max_width:
-                line = test_line
-            else:
-                lines.append(line)
-                line = word + ' '
-        lines.append(line)
-
-        x, y = pos
-        for line in lines:
-            text_surface = font.render(line.strip(), True, color)
-            surface.blit(text_surface, (x, y))
-            y += font.get_linesize()  # move down for next line
+    
