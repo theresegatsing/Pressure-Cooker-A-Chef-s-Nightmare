@@ -66,8 +66,8 @@ class SelectionScreen(object):
         for card in self.selectedCards:
             card.drawable.draw(surface)
 
-           
     
+
     def handleEvent(self, event):
         
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -79,5 +79,3 @@ class SelectionScreen(object):
                     game = Game(card.points)
                     game.run()
         
-
-    

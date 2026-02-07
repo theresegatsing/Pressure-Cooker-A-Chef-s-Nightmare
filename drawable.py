@@ -1,6 +1,6 @@
 from pygame import image, Surface, SRCALPHA
 from os.path import join
-from vector import vec, pyVec
+from vector import vec, pyVec, rectAdd
 from spriteManager import SpriteManager
 
 class Drawable(object):
@@ -53,6 +53,9 @@ class Drawable(object):
     
     def setPosition(self, newPosition):
         self.position = vec(*newPosition)
+    
+    def getCollisionRect(self):
+        return rectAdd(self.getPosition(), self.image.get_rect())
     
     def handleEvent(self, event):
         pass
