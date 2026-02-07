@@ -5,6 +5,7 @@ from os.path import join
 from PIL import Image
 from card import Card 
 import random 
+from vector import vec
 
 SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 350
@@ -45,34 +46,34 @@ class SelectionScreen(object):
     
     def position_cards_centered(self):
         total_width = (
-            len(self.selected_cards) * CARD_WIDTH
-            + (len(self.selected_cards) - 1) * CARD_GAP
+            len(self.selectedCards) * CARD_WIDTH
+            + (len(self.selectedCards) - 1) * CARD_GAP
         )
 
         start_x = (SCREEN_WIDTH - total_width) // 2
         y = 40
 
-        for i, card in enumerate(self.selected_cards):
+        for i, card in enumerate(self.selectedCards):
             x = start_x + i * (CARD_WIDTH + CARD_GAP)
-            card.drawable.pos = (x, y)
+            card.drawable.position = vec(x, y)
 
 
     def draw(self, surface):
-        
-        surface.fill((0,0,0))
+        surface.fill((0, 0, 0))
         self.background.draw(surface)
 
         for card in self.selectedCards:
-
             card.drawable.draw(surface)
 
-            text_y = card.drawable.pos[1] + CARD_HEIGHT + TEXT_PADDING
+            text_y = card.drawable.position.y + CARD_HEIGHT + TEXT_PADDING
+            text_x = card.drawable.position.x
+
             self.render_multiline_text(
                 surface,
                 card.description,
                 font,
                 (0, 0, 0),
-                (card.drawable.pos[0], text_y),
+                (text_x, text_y),
                 CARD_WIDTH
             )
 
