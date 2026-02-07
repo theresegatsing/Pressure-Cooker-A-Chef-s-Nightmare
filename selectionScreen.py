@@ -55,25 +55,26 @@ class SelectionScreen(object):
         for i, card in enumerate(self.selected_cards):
             x = start_x + i * (CARD_WIDTH + CARD_GAP)
             card.drawable.pos = (x, y)
-            
+
 
     def draw(self, surface):
         
         surface.fill((0,0,0))
-        
         self.background.draw(surface)
-        self.burgerCard.draw(surface)
-        text = (" 2100 points . A burger is a popular meal that originated in Germany, specifically in the city of Hamburg. "
-        "It was inspired by the Hamburg steak and later became widely known after being introduced in the United States.")
-        self.render_multiline_text(
-        surface,
-        text,
-        font,
-        (0, 0, 0),         # black color
-        (60, 90 + 110 + 5), # x = same as card, y = card y + card height + small padding
-        150                  # max width = card width
-        )
 
+        for card in self.selectedCards:
+
+            card.drawable.draw(surface)
+
+            text_y = card.drawable.pos[1] + CARD_HEIGHT + TEXT_PADDING
+            self.render_multiline_text(
+                surface,
+                card.description,
+                font,
+                (0, 0, 0),
+                (card.drawable.pos[0], text_y),
+                CARD_WIDTH
+            )
 
     
     def handleEvent(self, event):
