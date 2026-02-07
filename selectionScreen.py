@@ -33,7 +33,7 @@ class SelectionScreen(object):
             Card("hotdogCard.png", 
                  2000),
             
-            Card("ramen ccard.png",
+            Card("ramenCard.png",
                  2300)
         ]
 
@@ -51,7 +51,7 @@ class SelectionScreen(object):
             card_gap = 20
 
         start_x = SIDE_MARGIN
-        y = 40
+        y = 80
 
         for i, card in enumerate(self.selectedCards):
             x = start_x + i * (CARD_WIDTH + card_gap)
