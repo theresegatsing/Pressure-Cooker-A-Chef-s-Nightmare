@@ -13,7 +13,7 @@ class Game(object):
         pygame.init()
         screen = pygame.display.set_mode(pyVec(UPSCALED))
         #drawSurface = pygame.Surface(pyVec(RESOLUTION))
-        clock = pygame.time.Clock()
+        #clock = pygame.time.Clock()
 
         running = True
         while running:
@@ -23,4 +23,4 @@ class Game(object):
 
             screen.fill((255,255,255))
             pygame.display.flip()
-            clock.tick(60)
+            #clock.tick(60)

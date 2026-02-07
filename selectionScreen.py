@@ -10,6 +10,7 @@ from game import Game
 
 SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 350
+SCALE = 2
 
 CARD_WIDTH = 110
 CARD_HEIGHT = 160
@@ -70,12 +71,11 @@ class SelectionScreen(object):
 
     def handleEvent(self, event):
         
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            mouse_pos = vec(*event.pos)
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_pos = vec(*event.pos) // SCALE
             for card in self.selectedCards:
-                card_rect = pygame.Rect(card.drawable.position, (CARD_WIDTH, CARD_HEIGHT))
-                if card_rect.collidepoint(mouse_pos):
-                    print(f"Selected card with {card.points} points")
+                if card.drawable.getCollisionRect().collidepoint(mouse_pos):
                     game = Game(card.points)
                     game.run()
         
+       
