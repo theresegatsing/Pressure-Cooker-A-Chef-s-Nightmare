@@ -6,6 +6,7 @@ from PIL import Image
 from card import Card 
 import random 
 from vector import vec
+from game import Game
 
 SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 350
@@ -69,6 +70,14 @@ class SelectionScreen(object):
     
     def handleEvent(self, event):
         
-        pass
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            mouse_pos = vec(*event.pos)
+            for card in self.selectedCards:
+                card_rect = pygame.Rect(card.drawable.position, (CARD_WIDTH, CARD_HEIGHT))
+                if card_rect.collidepoint(mouse_pos):
+                    print(f"Selected card with {card.points} points")
+                    game = Game(card.points)
+                    game.run()
+        
 
     
