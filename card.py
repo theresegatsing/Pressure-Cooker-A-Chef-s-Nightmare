@@ -2,8 +2,8 @@ import pygame
 from drawable import Drawable
 
 
-CARD_WIDTH = 150
-CARD_HEIGHT = 200
+CARD_WIDTH = 110
+CARD_HEIGHT = 160
 CARD_GAP = 20
 TEXT_PADDING = 5
 

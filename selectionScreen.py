@@ -10,10 +10,11 @@ from vector import vec
 SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 350
 
-CARD_WIDTH = 150
-CARD_HEIGHT = 200
-CARD_GAP = 20
+CARD_WIDTH = 110
+CARD_HEIGHT = 160
+SIDE_MARGIN = 30
 TEXT_PADDING = 5
+
 
 pygame.init()
 #font = pygame.font.Font("Lonely Study.otf", 14)
@@ -45,16 +46,19 @@ class SelectionScreen(object):
 
     
     def position_cards_centered(self):
-        total_width = (
-            len(self.selectedCards) * CARD_WIDTH
-            + (len(self.selectedCards) - 1) * CARD_GAP
-        )
+        available_width = SCREEN_WIDTH - 2 * SIDE_MARGIN
+        num_cards = len(self.selectedCards)
 
-        start_x = (SCREEN_WIDTH - total_width) // 2
+        if num_cards > 1:
+            card_gap = (available_width - num_cards * CARD_WIDTH) // (num_cards - 1)
+        else:
+            card_gap = 20
+
+        start_x = SIDE_MARGIN
         y = 40
 
         for i, card in enumerate(self.selectedCards):
-            x = start_x + i * (CARD_WIDTH + CARD_GAP)
+            x = start_x + i * (CARD_WIDTH + card_gap)
             card.drawable.position = vec(x, y)
 
 
@@ -65,8 +69,8 @@ class SelectionScreen(object):
         for card in self.selectedCards:
             card.drawable.draw(surface)
 
-            text_y = card.drawable.position.y + CARD_HEIGHT + TEXT_PADDING
-            text_x = card.drawable.position.x
+            text_y = card.drawable.position[1] +  CARD_HEIGHT // 2
+            text_x = card.drawable.position[0] + 5
 
             self.render_multiline_text(
                 surface,
@@ -74,7 +78,7 @@ class SelectionScreen(object):
                 font,
                 (0, 0, 0),
                 (text_x, text_y),
-                CARD_WIDTH
+                CARD_WIDTH - 10
             )
 
     
