@@ -30,7 +30,7 @@ class SelectionScreen(object):
             Card("burgerCard.png", 
                 2100),
         
-            Card("hotdog ccard.png", 
+            Card("hotdogCard.png", 
                  2000),
             
             Card("ramen ccard.png",
