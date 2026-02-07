@@ -12,15 +12,18 @@ class Game(object):
     def run(self):
         pygame.init()
         screen = pygame.display.set_mode(pyVec(UPSCALED))
-        #drawSurface = pygame.Surface(pyVec(RESOLUTION))
-        #clock = pygame.time.Clock()
+        start_time = pygame.time.get_ticks()
 
         running = True
         while running:
+            screen.fill((255,255,255))
+            pygame.display.flip()
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
 
-            screen.fill((255,255,255))
-            pygame.display.flip()
-            #clock.tick(60)
+            elapsed_time = (pygame.time.get_ticks() - start_time) / 1000 #in seconds
+
+            if elapsed_time > 5:
+                running = False
