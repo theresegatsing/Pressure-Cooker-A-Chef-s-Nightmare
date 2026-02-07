@@ -1,8 +1,6 @@
 import pygame
 from drawable import Drawable
 
-SCREEN_WIDTH = 500
-SCREEN_HEIGHT = 350
 
 CARD_WIDTH = 150
 CARD_HEIGHT = 200
