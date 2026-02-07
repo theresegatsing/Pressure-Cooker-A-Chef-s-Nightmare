@@ -5,7 +5,8 @@ from os.path import join
 from PIL import Image
 
 pygame.init()
-font = pygame.font.Font("Lonely Study.otf", 14)
+#font = pygame.font.Font("Lonely Study.otf", 14)
+font = pygame.font.Font(None, 14)
 
 class SelectionScreen(object):
     def __init__(self):
