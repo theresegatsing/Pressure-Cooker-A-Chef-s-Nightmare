@@ -1,4 +1,8 @@
 import pygame 
+from vector import vec, pyVec
+RESOLUTION = vec(500,350)
+SCALE =2
+UPSCALED = RESOLUTION * SCALE
 
 class Game(object):
 
@@ -7,7 +11,8 @@ class Game(object):
 
     def run(self):
         pygame.init()
-        screen = pygame.display.set_mode((500, 350))
+        screen = pygame.display.set_mode(pyVec(UPSCALED))
+        #drawSurface = pygame.Surface(pyVec(RESOLUTION))
         clock = pygame.time.Clock()
 
         running = True
