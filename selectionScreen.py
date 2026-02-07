@@ -4,6 +4,14 @@ from mobile import Mobile, Player
 from os.path import join
 from PIL import Image
 
+SCREEN_WIDTH = 500
+SCREEN_HEIGHT = 350
+
+CARD_WIDTH = 150
+CARD_HEIGHT = 200
+CARD_GAP = 20
+TEXT_PADDING = 5
+
 pygame.init()
 #font = pygame.font.Font("Lonely Study.otf", 14)
 font = pygame.font.Font(None, 14)
@@ -13,7 +21,7 @@ class SelectionScreen(object):
         
         self.background = Drawable((0,0), "Selection Screen background.jpg")
         self.background.image = pygame.transform.smoothscale( self.background.image, (500, 350))
-        self.burgerCard = Drawable((60,90),  "bc.png")
+        self.burgerCard = Drawable((40,40),  "burger card.png")
         self.burgerCard.image = pygame.transform.smoothscale(self.burgerCard.image, (150, 200))
     
     def draw(self, surface):
@@ -22,7 +30,7 @@ class SelectionScreen(object):
         
         self.background.draw(surface)
         self.burgerCard.draw(surface)
-        text = ("A burger is a popular meal that originated in Germany, specifically in the city of Hamburg. "
+        text = (" 2100 points . A burger is a popular meal that originated in Germany, specifically in the city of Hamburg. "
         "It was inspired by the Hamburg steak and later became widely known after being introduced in the United States.")
         self.render_multiline_text(
         surface,
