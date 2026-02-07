@@ -4,13 +4,6 @@ from mobile import Mobile, Player
 from os.path import join
 from PIL import Image
 
-SCREEN_WIDTH = 500
-SCREEN_HEIGHT = 350
-
-CARD_WIDTH = 150
-CARD_HEIGHT = 200
-CARD_GAP = 20
-TEXT_PADDING = 5
 
 pygame.init()
 #font = pygame.font.Font("Lonely Study.otf", 14)
