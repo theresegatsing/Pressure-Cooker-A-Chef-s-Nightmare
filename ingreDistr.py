@@ -1,4 +1,5 @@
 import pygame 
+from gameEngine import GameEngine
 from vector import *
 import os
 import random
@@ -56,23 +57,33 @@ class IngredientDistribution(object):
         drawSurface = pygame.Surface(pyVec(RESOLUTION))
 
         self.load_ingredients()
+        clock = pygame.time.Clock()
         start_time = pygame.time.get_ticks()
+        engine = GameEngine()
 
         Running = True
         while Running:
-            pygame.transform.scale(drawSurface, pyVec(UPSCALED), screen)
-            pygame.display.flip()
+            seconds = clock.tick(60) / 1000 
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     Running = False
-            
+                engine.handleEvent(event)
+
+            engine.update(seconds)
+
             drawSurface.fill((255, 255, 255))
 
             for image, pos in self.ingredients:
                 drawSurface.blit(image, pyVec(pos))
 
-            elapsed_time = (pygame.time.get_ticks() - start_time) / 1000 #in seconds
+            engine.draw(drawSurface)
+
+            pygame.transform.scale(drawSurface, pyVec(UPSCALED), screen)
+            pygame.display.flip()
+
+            elapsed_time = (pygame.time.get_ticks() - start_time) / 1000
             if elapsed_time > 30:
                 Running = False
-            
+
+

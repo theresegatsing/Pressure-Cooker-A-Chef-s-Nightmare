@@ -34,6 +34,7 @@ class SpriteManager(object):
     
     # Static information about the sprite sizes of particular image sheets.
     _SPRITE_SIZES = {
+        "chef.jpg": vec(200, 200)   
     }
     
     # A default sprite size
@@ -48,7 +49,7 @@ class SpriteManager(object):
     _TRANSPARENCY = [""]
     
     # A list of images that require to be loaded with a color key
-    _COLOR_KEY = [""]
+    _COLOR_KEY = ["chef.jpg"]
     
     def __init__(self):
         """Creation of the SpriteManager, sets up storage for surface.

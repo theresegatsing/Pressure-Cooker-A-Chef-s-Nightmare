@@ -1,14 +1,16 @@
 from drawable import Drawable
+from animated import Animated
 from vector import vec, magnitude, scale
 from pygame.locals import *
 
-class Mobile(Drawable):
-    def __init__(self, position, fileName="", offset=None, maxSpeed=100, transparency=False, colorkey=False):
-        super().__init__(position, fileName, offset, transparency, colorkey)
+class Mobile(Animated):
+    def __init__(self, position, fileName="", offset=None, maxSpeed=100):
+        super().__init__(position, fileName, offset)
         self.velocity = vec(0,0)
         self.maxSpeed = maxSpeed
     
     def update(self, seconds):
+        super().update(seconds)
         if magnitude(self.velocity) > self.maxSpeed:
             self.velocity = scale(self.velocity, self.maxSpeed)
 
@@ -17,8 +19,8 @@ class Mobile(Drawable):
 
 
 class Player(Mobile):
-    def __init__(self, position, fileName="", offset=None, maxSpeed=100, transparency=False, colorkey=False):
-        super().__init__(position, fileName, offset, maxSpeed, transparency, colorkey)
+    def __init__(self, position, fileName="", offset=None, maxSpeed=100):
+        super().__init__(position, fileName, offset, maxSpeed)
         self.speed = 100
 
         self.keyMap = {
@@ -50,4 +52,3 @@ class Player(Mobile):
             self.velocity[1] = 0
         
         super().update(seconds)
-
