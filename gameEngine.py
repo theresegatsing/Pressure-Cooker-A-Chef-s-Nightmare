@@ -14,7 +14,7 @@ import random
 class GameEngine(object):
 
     def __init__(self):        
-        self.chef = Player((0,0), "chef.jpg", (2,1))
+        self.chef = Player((0,0), "chef.png", (0,0))
         self.chef.animate = True
        
         self.chefSpeed = 100
@@ -34,7 +34,9 @@ class GameEngine(object):
         self.chef.draw(drawSurface)
             
     def handleEvent(self, event):        
-        
+        if event.type == pygame.MOUSEMOTION:
+            position = vec(*event.pos) // SCALE
+            position += Drawable.CAMERA_OFFSET
         self.chef.handleEvent(event)        
     
     
