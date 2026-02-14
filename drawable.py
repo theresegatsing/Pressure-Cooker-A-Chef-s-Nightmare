@@ -4,6 +4,8 @@ from vector import vec, pyVec, rectAdd
 from spriteManager import SpriteManager
 
 class Drawable(object):
+    CAMERA_OFFSET = vec(0,0)
+    
     def __init__(self, position=vec(0,0), fileName="", offset=None, transparency=False, colorkey=False):
         if fileName != "":
             sm = SpriteManager.getInstance()
