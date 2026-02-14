@@ -13,22 +13,6 @@ class Game(object):
         self.points = points
 
     def run(self):
-        pygame.init()
-        screen = pygame.display.set_mode(pyVec(UPSCALED))
-        start_time = pygame.time.get_ticks()
-
-        running = True
-        while running:
-            screen.fill((255,255,255))
-            pygame.display.flip()
-
-            IngredientDistribution(self.image_path).run()
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-
-            elapsed_time = (pygame.time.get_ticks() - start_time) / 1000 #in seconds
-
-            if elapsed_time > 10:
-                running = False
+        
+        IngredientDistribution(self.image_path).run()
+        

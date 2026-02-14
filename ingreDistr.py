@@ -34,14 +34,12 @@ class IngredientDistribution(object):
             full_path = os.path.join(self.mealPath, filename)
             image = pygame.image.load(full_path).convert_alpha()
 
-            # --- ADD SCALING HERE ---
-            MAX_SIZE = 64  # maximum width or height
+            MAX_SIZE = 50
             w, h = image.get_size()
-            scale = min(MAX_SIZE / w, MAX_SIZE / h, 1)  # only shrink if bigger than MAX_SIZE
+            scale = min(MAX_SIZE / w, MAX_SIZE / h, 1)  
             image = pygame.transform.smoothscale(image, (int(w * scale), int(h * scale)))
-            # --- SCALING DONE ---
+            
 
-            # Now generate a random position based on the scaled image size
             x = random.randint(0, max(0, RESOLUTION[0] - image.get_width()))
             y = random.randint(0, max(0, RESOLUTION[1] - image.get_height()))
 
@@ -53,14 +51,17 @@ class IngredientDistribution(object):
         if self.mealPath == "":
             print("No valid meal found in image card.")
             return
-        
+        pygame.init()
         screen = pygame.display.set_mode(pyVec(UPSCALED))
         drawSurface = pygame.Surface(pyVec(RESOLUTION))
 
         self.load_ingredients()
+        start_time = pygame.time.get_ticks()
 
         Running = True
         while Running:
+            pygame.transform.scale(drawSurface, pyVec(UPSCALED), screen)
+            pygame.display.flip()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -71,5 +72,7 @@ class IngredientDistribution(object):
             for image, pos in self.ingredients:
                 drawSurface.blit(image, pyVec(pos))
 
-            pygame.transform.scale(drawSurface, pyVec(UPSCALED), screen)
-            pygame.display.flip()
+            elapsed_time = (pygame.time.get_ticks() - start_time) / 1000 #in seconds
+            if elapsed_time > 30:
+                Running = False
+            
