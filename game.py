@@ -30,5 +30,5 @@ class Game(object):
 
             elapsed_time = (pygame.time.get_ticks() - start_time) / 1000 #in seconds
 
-            if elapsed_time > 120:
+            if elapsed_time > 10:
                 running = False
