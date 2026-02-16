@@ -3,9 +3,7 @@ from gameEngine import GameEngine
 from vector import *
 import os
 import random
-RESOLUTION = vec(500,350)
-SCALE =2
-UPSCALED = RESOLUTION * SCALE
+from constants import *
 
 PATH = "game sprites"
 

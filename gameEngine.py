@@ -4,11 +4,7 @@ from mobile import Mobile, Player
 from os.path import join
 from vector import vec, pyVec
 from animated import Animated
-
-RESOLUTION = vec(500,350)
-WORLD_SIZE = vec(1000,700)
-SCALE =2
-UPSCALED = RESOLUTION * SCALE
+from constants import *
 import random 
 
 class GameEngine(object):
@@ -23,10 +19,7 @@ class GameEngine(object):
 
        
 
-        self.mouseOffset = vec(0,0)
-
-        self.timer = 5
-
+       #self.mouseOffset = vec(0,0)
 
 
     def draw(self, drawSurface):
@@ -34,19 +27,12 @@ class GameEngine(object):
         self.chef.draw(drawSurface)
             
     def handleEvent(self, event):        
-        if event.type == pygame.MOUSEMOTION:
-            position = vec(*event.pos) // SCALE
-            position += Drawable.CAMERA_OFFSET
+
         self.chef.handleEvent(event)        
     
     
     def update(self, seconds):
         self.chef.update(seconds)
-
-        
-        self.timer -= seconds
-
-        
 
 
         if self.chef.getPosition()[0] <= 0:
@@ -94,8 +80,9 @@ class GameEngine(object):
             #             self.kirby.position[1] += collision.height
 
 
-        Drawable.CAMERA_OFFSET = self.chef.getPosition() + self.chef.getSize() /2 -  RESOLUTION //2 
+        Drawable.CAMERA_OFFSET = self.chef.getPosition() + self.chef.getSize() /2 -  RESOLUTION /2
 
-        for i in range(2):
-            Drawable.CAMERA_OFFSET[i] = max(min(Drawable.CAMERA_OFFSET[i], WORLD_SIZE[i] - RESOLUTION[i]), 
-                                            0)
+        for i in range (2):
+             Drawable.CAMERA_OFFSET[i] = max(min(Drawable.CAMERA_OFFSET[i], WORLD_SIZE[i] - RESOLUTION[i]), 
+                                              0)
+        
