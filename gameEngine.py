@@ -5,6 +5,7 @@ from os.path import join
 from vector import vec, pyVec
 from animated import Animated
 from constants import *
+from ingreDistr import IngredientDistribution
 import random 
 
 class GameEngine(object):
@@ -15,7 +16,7 @@ class GameEngine(object):
        
         self.chefSpeed = 100
 
-        #self.collidables = [self.subRainbow, self.waterLily]
+        self.collidables = self.ingredients
 
        
 
