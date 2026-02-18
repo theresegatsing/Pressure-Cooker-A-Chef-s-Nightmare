@@ -39,8 +39,8 @@ class IngredientDistribution(object):
             image = pygame.transform.smoothscale(image, (int(w * scale), int(h * scale)))
             
 
-            x = random.randint(0, max(0, RESOLUTION[0] - image.get_width()))
-            y = random.randint(0, max(0, RESOLUTION[1] - image.get_height()))
+            x = random.randint(0, max(0, WORLD_SIZE[0] - image.get_width()))
+            y = random.randint(0, max(0, WORLD_SIZE[1] - image.get_height()))
 
             self.ingredients.append((image, vec(x, y)))
 
