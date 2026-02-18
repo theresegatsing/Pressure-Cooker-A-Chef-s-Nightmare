@@ -5,18 +5,17 @@ from os.path import join
 from vector import vec, pyVec
 from animated import Animated
 from constants import *
-from ingreDistr import IngredientDistribution
 import random 
 
 class GameEngine(object):
 
-    def __init__(self):        
+    def __init__(self, ingredients):
         self.chef = Player((0,0), "chef.png", (0,0))
         self.chef.animate = True
        
         self.chefSpeed = 100
 
-        self.collidables = self.ingredients
+        self.collidables = ingredients
 
        
 
@@ -52,33 +51,11 @@ class GameEngine(object):
             self.chef.velocity[1]= 0
 
 
-        # for c in self.collidables:
-        #     collision = self.kirby.getCollisionRect().clip(c.getCollisionRect())
+     # for c in self.collidables:
+     #      collision = self.chef.getCollisionRect().clip(c.getCollisionRect())
 
-            # if collision.width !=0 and collision.height !=0:
-
-            #     if collision.width  < collision.height:
-            #         #left /right push
-            #         self.kirby.velocity[0] = 0
-            #         if self.kirby.getPosition()[0] < c.getPosition()[0]:
-            #             #left push
-                        
-            #             self.kirby.position[0] -= collision.width
-            #         else:
-            #             #right push
-                        
-            #             self.kirby.position[0] += collision.width
-            #     else:
-            #         self.kirby.velocity[1] = 0
-
-            #         if self.kirby.getPosition()[1] < c.getPosition()[1]:
-            #             #top push
-                        
-            #             self.kirby.position[1] -= collision.height
-            #         else:
-            #             #bottom push
-                        
-            #             self.kirby.position[1] += collision.height
+      #     if collision.width !=0 and collision.height !=0:
+     #          self.collidables.remove(c)
 
 
         Drawable.CAMERA_OFFSET = self.chef.getPosition() + self.chef.getSize() /2 -  RESOLUTION /2

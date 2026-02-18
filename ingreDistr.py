@@ -57,14 +57,14 @@ class IngredientDistribution(object):
         self.load_ingredients()
         clock = pygame.time.Clock()
         start_time = pygame.time.get_ticks()
-        engine = GameEngine()
+        engine = GameEngine(self.ingredients)
 
         Running = True
         while Running:
             seconds = clock.tick(60) / 1000 
 
             for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                     Running = False
                     Drawable.CAMERA_OFFSET = vec(0,0)
                 engine.handleEvent(event)
