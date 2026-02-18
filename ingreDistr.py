@@ -82,7 +82,7 @@ class IngredientDistribution(object):
             pygame.display.flip()
 
             elapsed_time = (pygame.time.get_ticks() - start_time) / 1000
-            if elapsed_time > 30:
+            if elapsed_time > 120:
                 Running = False
                 Drawable.CAMERA_OFFSET = vec(0,0)
 
