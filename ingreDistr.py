@@ -1,5 +1,5 @@
 import pygame 
-from gameEngine import GameEngine
+from gameEngine import Drawable, GameEngine
 from vector import *
 import os
 import random
@@ -64,8 +64,9 @@ class IngredientDistribution(object):
             seconds = clock.tick(60) / 1000 
 
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     Running = False
+                    Drawable.CAMERA_OFFSET = vec(0,0)
                 engine.handleEvent(event)
 
             engine.update(seconds)
@@ -73,7 +74,7 @@ class IngredientDistribution(object):
             drawSurface.fill((255, 255, 255))
 
             for image, pos in self.ingredients:
-                drawSurface.blit(image, pyVec(pos))
+                drawSurface.blit(image, pyVec(pos-Drawable.CAMERA_OFFSET))
 
             engine.draw(drawSurface)
 
@@ -83,5 +84,6 @@ class IngredientDistribution(object):
             elapsed_time = (pygame.time.get_ticks() - start_time) / 1000
             if elapsed_time > 30:
                 Running = False
+                Drawable.CAMERA_OFFSET = vec(0,0)
 
 
