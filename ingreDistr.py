@@ -45,21 +45,29 @@ class IngredientDistribution(object):
             self.ingredients.append((image, vec(x, y)))
 
     def draw(self, surface):
-        
+
         for image, pos in self.ingredients:
                 surface.blit(image, pyVec(pos-Drawable.CAMERA_OFFSET))
 
+
+    def handleEvent(self, event):
+        pass
+
+    def getIngredients(self):
+        return self.ingredients
+    
     def run(self):
         if self.mealPath == "":
             print("No valid meal found in image card.")
             return
-        pygame.init()
-        screen = pygame.display.set_mode(pyVec(UPSCALED))
-        drawSurface = pygame.Surface(pyVec(RESOLUTION))
+        
+        #pygame.init()
+        #screen = pygame.display.set_mode(pyVec(UPSCALED))
+        #drawSurface = pygame.Surface(pyVec(RESOLUTION))
 
         self.load_ingredients()
-        clock = pygame.time.Clock()
-        start_time = pygame.time.get_ticks()
+        #clock = pygame.time.Clock()
+        #start_time = pygame.time.get_ticks()
         engine = GameEngine(self.ingredients)
 
         Running = True
