@@ -2,6 +2,7 @@ import pygame
 from vector import *
 from selectionScreen import SelectionScreen
 from constants import *
+from ingreDistr import IngredientDistribution
 
 def main():
     

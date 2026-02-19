@@ -44,7 +44,10 @@ class IngredientDistribution(object):
 
             self.ingredients.append((image, vec(x, y)))
 
-    
+    def draw(self, surface):
+        
+        for image, pos in self.ingredients:
+                surface.blit(image, pyVec(pos-Drawable.CAMERA_OFFSET))
 
     def run(self):
         if self.mealPath == "":
@@ -71,10 +74,10 @@ class IngredientDistribution(object):
 
             engine.update(seconds)
 
-            drawSurface.fill((255, 255, 255))
+            #drawSurface.fill((255, 255, 255))
 
-            for image, pos in self.ingredients:
-                drawSurface.blit(image, pyVec(pos-Drawable.CAMERA_OFFSET))
+            #for image, pos in self.ingredients:
+             #   drawSurface.blit(image, pyVec(pos-Drawable.CAMERA_OFFSET))
 
             engine.draw(drawSurface)
 
