@@ -19,9 +19,7 @@ SIDE_MARGIN = 30
 TEXT_PADDING = 5
 
 
-#pygame.init()
-#font = pygame.font.Font("Lonely Study.otf", 14)
-#font = pygame.font.Font(None, 14)
+
 
 class SelectionScreen(object):
     def __init__(self):

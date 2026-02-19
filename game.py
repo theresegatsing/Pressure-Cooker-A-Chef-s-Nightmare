@@ -2,9 +2,7 @@ import pygame
 from vector import vec, pyVec
 from ingreDistr import IngredientDistribution
 from selectionScreen import *
-RESOLUTION = vec(500,350)
-SCALE =2
-UPSCALED = RESOLUTION * SCALE
+
 
 class Game(object):
 
