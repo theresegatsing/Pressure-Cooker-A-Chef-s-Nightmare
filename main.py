@@ -17,9 +17,9 @@ def main():
     clock = pygame.time.Clock()
     start_time = pygame.time.get_ticks()
 
-    engine = GameEngine(self.ingredients)
-    selectionScreen = SelectionScreen()
     
+    selectionScreen = SelectionScreen()
+
     RUNNING = True
 
     while RUNNING:
@@ -40,6 +40,15 @@ def main():
                 Drawable.CAMERA_OFFSET = vec(0,0)
             else:
                 selectionScreen.handleEvent(event)
+                engine.handleEvent(event)
+        
+        engine.update(seconds)
+        engine.draw(drawSurface)
+
+        elapsed_time = (pygame.time.get_ticks() - start_time) / 1000
+        if elapsed_time > 120:
+            RUNNING = False
+            Drawable.CAMERA_OFFSET = vec(0,0)
     
     pygame.quit()
 

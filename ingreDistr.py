@@ -51,10 +51,15 @@ class IngredientDistribution(object):
 
 
     def handleEvent(self, event):
-        pass
+        self.load_ingredients()
+        engine = GameEngine(self.ingredients)
+        engine.handleEvent(event)
+    
+    def update(self, seconds):
+        engine.update(seconds)
 
-    def getIngredients(self):
-        return self.ingredients
+    #def getIngredients(self):
+    #    return self.ingredients
     
     def run(self):
         if self.mealPath == "":
@@ -65,10 +70,10 @@ class IngredientDistribution(object):
         #screen = pygame.display.set_mode(pyVec(UPSCALED))
         #drawSurface = pygame.Surface(pyVec(RESOLUTION))
 
-        self.load_ingredients()
+        
         #clock = pygame.time.Clock()
         #start_time = pygame.time.get_ticks()
-        engine = GameEngine(self.ingredients)
+        
 
         Running = True
         while Running:
@@ -78,7 +83,7 @@ class IngredientDistribution(object):
                 if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                     Running = False
                     Drawable.CAMERA_OFFSET = vec(0,0)
-                engine.handleEvent(event)
+                #engine.handleEvent(event)
 
             engine.update(seconds)
 
