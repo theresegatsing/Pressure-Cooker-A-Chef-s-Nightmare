@@ -42,19 +42,20 @@ def main():
             elif state == "game":
                 game.handleEvent(event)
 
-        # -------- DRAW / UPDATE --------
 
         if state == "selection":
             selectionScreen.draw(drawSurface)
 
         elif state == "game":
+
             game.update(seconds)
 
             if game.finished:
                 game = None
+                Drawable.CAMERA_OFFSET = vec(0,0)
                 state = "selection"
                 continue
-            
+
             game.draw(drawSurface)
 
         pygame.transform.scale(drawSurface, pyVec(UPSCALED), screen)

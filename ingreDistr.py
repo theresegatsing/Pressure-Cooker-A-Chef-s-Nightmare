@@ -29,9 +29,7 @@ class IngredientDistribution(object):
         self.load_ingredients()
         self.engine = GameEngine(self.ingredients)
 
-    # --------------------
-    # LOAD
-    # --------------------
+   
     def load_ingredients(self):
 
         if not os.path.isdir(self.mealPath):
@@ -55,21 +53,15 @@ class IngredientDistribution(object):
 
             self.ingredients.append((image, vec(x, y)))
 
-    # --------------------
-    # INPUT
-    # --------------------
+    
     def handleEvent(self, event):
         self.engine.handleEvent(event)
 
-    # --------------------
-    # UPDATE
-    # --------------------
+   
     def update(self, seconds):
         self.engine.update(seconds)
 
-    # --------------------
-    # DRAW
-    # --------------------
+   
     def draw(self, surface):
 
         surface.fill((255, 255, 255))

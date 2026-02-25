@@ -14,18 +14,15 @@ class Game(object):
 
         self.state = IngredientDistribution(image_path)
 
-        # TIMER
         self.timeLimit = 30.0   # seconds
         self.timeLeft = 30.0
         self.finished = False
 
-        self.font = pygame.font.SysFont(None, 28)
+        self.font = pygame.font.SysFont(None, 18)
 
-    # ------------------
     def handleEvent(self, event):
         self.state.handleEvent(event)
 
-    # ------------------
     def update(self, seconds):
 
         if self.finished:
@@ -40,7 +37,7 @@ class Game(object):
 
         self.state.update(seconds)
 
-    # ------------------
+
     def draw(self, surface):
 
         self.state.draw(surface)
