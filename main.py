@@ -49,6 +49,12 @@ def main():
 
         elif state == "game":
             game.update(seconds)
+
+            if game.finished:
+                game = None
+                state = "selection"
+                continue
+            
             game.draw(drawSurface)
 
         pygame.transform.scale(drawSurface, pyVec(UPSCALED), screen)
