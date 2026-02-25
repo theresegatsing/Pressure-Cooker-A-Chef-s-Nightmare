@@ -29,7 +29,7 @@ class IngredientDistribution(object):
         self.load_ingredients()
         self.engine = GameEngine(self.ingredients)
 
-    def make_grey(image):
+    def make_grey(self, image):
         grey = image.copy()
         arr = pygame.surfarray.pixels3d(grey)
         avg = arr.mean(axis=2, keepdims=True)
@@ -58,7 +58,15 @@ class IngredientDistribution(object):
             x = random.randint(0, WORLD_SIZE[0] - image.get_width())
             y = random.randint(0, WORLD_SIZE[1] - image.get_height())
 
-            self.ingredients.append((image, vec(x, y)))
+            #self.ingredients.append((image, vec(x, y)))
+            grey = self.make_grey(image)
+
+            self.ingredients.append({
+                "image": image,
+                "grey": grey,
+                "pos": vec(x, y),
+                "collected": False
+            })
 
     
     def handleEvent(self, event):
@@ -73,7 +81,27 @@ class IngredientDistribution(object):
 
         surface.fill((255, 255, 255))
 
-        for image, pos in self.ingredients:
-            surface.blit(image, pyVec(pos - Drawable.CAMERA_OFFSET))
 
+        for ing in self.ingredients:
+            if not ing["collected"]:
+                surface.blit(
+                    ing["image"],
+                    pyVec(ing["pos"] - Drawable.CAMERA_OFFSET)
+                )
+        
+        icon_size = 30
+        padding = 10
+        x_offset = RESOLUTION[0] - padding
+
+        for ing in reversed(self.ingredients):
+
+            icon = ing["image"] if ing["collected"] else ing["grey"]
+            small_icon = pygame.transform.smoothscale(
+                icon, (icon_size, icon_size)
+            )
+
+            x_offset -= icon_size
+            surface.blit(small_icon, (x_offset, 10))
+            x_offset -= padding
+            
         self.engine.draw(surface)

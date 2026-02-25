@@ -49,8 +49,12 @@ class GameEngine(object):
 
 
         chefRect = self.chef.getCollisionRect()
-        for ing in self.collidables[:]:   
-            image, pos = ing
+        for ing in self.collidables:   
+            if ing["collected"]:
+                continue
+
+            pos = ing["pos"]
+            image = ing["image"]
 
             ingRect = pygame.Rect(
                 pos[0],
@@ -60,7 +64,9 @@ class GameEngine(object):
             )
 
             if chefRect.colliderect(ingRect):
-                self.collidables.remove(ing)
+                ing["collected"] = True
+
+
 
         Drawable.CAMERA_OFFSET = self.chef.getPosition() + self.chef.getSize() /2 -  RESOLUTION /2
 
