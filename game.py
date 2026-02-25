@@ -2,6 +2,7 @@ import pygame
 from vector import vec, pyVec
 from ingreDistr import IngredientDistribution
 from selectionScreen import *
+from world import World
 
 
 
@@ -13,6 +14,7 @@ class Game(object):
         self.points = points
 
         self.state = IngredientDistribution(image_path)
+        self.world = World()
 
         self.timeLimit = 60.0 # seconds
         self.timeLeft = 60.0
@@ -62,6 +64,7 @@ class Game(object):
 
         if not self.endScreen:
 
+            self.world.draw(surface)
             self.state.draw(surface)
 
             timerText = self.font.render(
