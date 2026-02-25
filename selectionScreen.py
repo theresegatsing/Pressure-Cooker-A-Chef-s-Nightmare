@@ -72,9 +72,9 @@ class SelectionScreen(object):
         
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = vec(*event.pos) // SCALE
+
             for card in self.selectedCards:
                 if card.drawable.getCollisionRect().collidepoint(mouse_pos):
-                    game = Game(card.image_path, card.points)
-                    game.run()
+                    return card.image_path
         
        
