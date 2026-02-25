@@ -19,9 +19,6 @@ class GameEngine(object):
 
        
 
-       #self.mouseOffset = vec(0,0)
-
-
     def draw(self, drawSurface):
         
         self.chef.draw(drawSurface)
@@ -51,12 +48,19 @@ class GameEngine(object):
             self.chef.velocity[1]= 0
 
 
-     # for c in self.collidables:
-     #      collision = self.chef.getCollisionRect().clip(c.getCollisionRect())
+        chefRect = self.chef.getCollisionRect()
+        for ing in self.collidables[:]:   
+            image, pos = ing
 
-      #     if collision.width !=0 and collision.height !=0:
-     #          self.collidables.remove(c)
+            ingRect = pygame.Rect(
+                pos[0],
+                pos[1],
+                image.get_width(),
+                image.get_height()
+            )
 
+            if chefRect.colliderect(ingRect):
+                self.collidables.remove(ing)
 
         Drawable.CAMERA_OFFSET = self.chef.getPosition() + self.chef.getSize() /2 -  RESOLUTION /2
 
