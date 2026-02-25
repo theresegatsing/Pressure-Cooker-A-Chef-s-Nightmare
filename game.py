@@ -19,6 +19,15 @@ class Game(object):
         self.state.handleEvent(event)
 
     def update(self, seconds):
+        if self.finished:
+            return
+
+        self.elapsed += seconds
+
+        if self.elapsed >= self.timeLimit:
+            self.finished = True
+            return
+
         self.state.update(seconds)
 
     def draw(self, surface):
