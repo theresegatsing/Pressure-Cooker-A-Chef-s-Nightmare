@@ -16,21 +16,34 @@ class Game(object):
 
         self.timeLimit = 60.0 # seconds
         self.timeLeft = 60.0
-        self.finished = False
 
-        self.endScreen = False
+        self.finished = False  # tells main to return to selection
+        self.endScreen = False # shows popup with time taken and score
+
         self.timeTaken = 0
+        self.score = 0
 
         self.font = pygame.font.SysFont(None, 18)
 
     def handleEvent(self, event):
+        if self.endScreen:
+
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                self.finished = True
+
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                self.finished = True
+
+            return
+        
         self.state.handleEvent(event)
 
     def update(self, seconds):
 
-        if self.finished:
+        if self.endScreen:
             return
 
+    
         self.timeLeft -= seconds
 
         if self.timeLeft <= 0:
@@ -41,9 +54,7 @@ class Game(object):
         self.state.update(seconds)
 
         if all(ing["collected"] for ing in self.state.ingredients):
-            self.finished = True
-
-        if self.finished and not self.endScreen:
+            self.score = self.points
             self.timeTaken = self.timeLimit - self.timeLeft
             self.endScreen = True
 
@@ -61,19 +72,20 @@ class Game(object):
             surface.blit(timerText, (10, 10))
 
         else:
-            surface.fill((255,255,255))
+            
+            overlay = pygame.Surface(surface.get_size(), pygame.SRCALPHA)
+            overlay.fill((0,0,0,180))
+            surface.blit(overlay, (0,0))
 
-            timeText = self.font.render(
-                f"Time Taken: {round(self.timeTaken,1)}",
-                True,
-                (0,0,0)
-            )
+            title = self.font.render("Round Complete!", True, (255,255,255))
+            timeText = self.font.render(f"Time Taken: {round(self.timeTaken,1)}", True, (255,255,255))
+            scoreText = self.font.render(f"Score: {self.score}", True, (255,255,255))
+            exitText = self.font.render("Press ESC or Click to continue", True, (200,200,200))
 
-            scoreText = self.font.render(
-                f"Score: {self.points}",
-                True,
-                (0,0,0)
-            )
+            cx = surface.get_width() // 2
 
-            surface.blit(timeText, (RESOLUTION[0]//2 - 80, 120))
-            surface.blit(scoreText, (RESOLUTION[0]//2 - 50, 160))
+            surface.blit(title, (cx-110,120))
+            surface.blit(timeText,(cx-110,160))
+            surface.blit(scoreText,(cx-70,200))
+            surface.blit(exitText,(cx-190,250))
+    
