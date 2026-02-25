@@ -15,31 +15,34 @@ def main():
 
     screen = pygame.display.set_mode(pyVec(UPSCALED))
     drawSurface = pygame.Surface(pyVec(RESOLUTION))
-
     clock = pygame.time.Clock()
 
     selectionScreen = SelectionScreen()
     game = None
 
     state = "selection"
-
     RUNNING = True
 
     while RUNNING:
+
         seconds = clock.tick(60) / 1000
 
         for event in pygame.event.get():
+
             if event.type == pygame.QUIT:
                 RUNNING = False
 
             if state == "selection":
                 selected_path = selectionScreen.handleEvent(event)
+
                 if selected_path:
                     game = Game(selected_path, 0)
                     state = "game"
 
             elif state == "game":
                 game.handleEvent(event)
+
+        # -------- DRAW / UPDATE --------
 
         if state == "selection":
             selectionScreen.draw(drawSurface)
@@ -52,56 +55,3 @@ def main():
         pygame.display.flip()
 
     pygame.quit()
-
-"""
-def main():
-    
-    pygame.init()
-    pygame.font.init()
-    screen = pygame.display.set_mode(pyVec(UPSCALED))
-    drawSurface = pygame.Surface(pyVec(RESOLUTION))
-
-    clock = pygame.time.Clock()
-    start_time = pygame.time.get_ticks()
-
-    
-    selectionScreen = SelectionScreen()
-
-    RUNNING = True
-
-    while RUNNING:
-        seconds = clock.tick(60) / 1000 
-
-        selectionScreen.draw(drawSurface)
-
-        pygame.transform.scale(drawSurface,
-                               pyVec(UPSCALED),
-                               screen)
-     
-        pygame.display.flip()
-
-        for event in pygame.event.get():
-
-            if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
-                RUNNING = False
-                Drawable.CAMERA_OFFSET = vec(0,0)
-            else:
-                selectionScreen.handleEvent(event)
-                engine.handleEvent(event)
-        
-        engine.update(seconds)
-        engine.draw(drawSurface)
-
-        elapsed_time = (pygame.time.get_ticks() - start_time) / 1000
-        if elapsed_time > 120:
-            RUNNING = False
-            Drawable.CAMERA_OFFSET = vec(0,0)
-    
-    pygame.quit()
-
-"""
-
-if __name__ == '__main__':
-    main()
-
-
