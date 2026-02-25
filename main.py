@@ -7,7 +7,6 @@ from drawable import Drawable
 from mobile import Mobile, Player
 from gameEngine import GameEngine
 from game import Game
-from world import World
 
 def main():
 
@@ -28,7 +27,7 @@ def main():
 
         seconds = clock.tick(60) / 1000
         drawSurface.fill((0,0,0))
-        
+
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:

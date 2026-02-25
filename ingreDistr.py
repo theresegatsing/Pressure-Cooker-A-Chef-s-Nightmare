@@ -13,12 +13,16 @@ class IngredientDistribution(object):
 
     def __init__(self, imageCard):
 
+        #Drawing the background
+
         self.tree = Drawable((0,0), "t2.png")
         self.tree.image = pygame.transform.scale(
             self.tree.image,
-            pyVec(WORLD_SIZE)
+            (50,50)
         )
 
+
+        # Storing the image card for later use in determining which meal to load
         self.imageCard = imageCard
 
         self.allMeals = ["burger", "hotdog", "ramen"]
