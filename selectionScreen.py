@@ -75,6 +75,6 @@ class SelectionScreen(object):
 
             for card in self.selectedCards:
                 if card.drawable.getCollisionRect().collidepoint(mouse_pos):
-                    return card.image_path
+                    return (card.image_path, card.points)
         
        

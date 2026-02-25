@@ -21,7 +21,7 @@ class Game(object):
         self.endScreen = False # shows popup with time taken and score
 
         self.timeTaken = 0
-        self.score = 0
+        self.score = self.points
 
         self.font = pygame.font.SysFont(None, 18)
 
@@ -80,7 +80,7 @@ class Game(object):
             title = self.font.render("Round Complete!", True, (255,255,255))
             timeText = self.font.render(f"Time Taken: {round(self.timeTaken,1)}", True, (255,255,255))
             scoreText = self.font.render(f"Score: {self.score}", True, (255,255,255))
-            exitText = self.font.render("Press ESC or Click to continue", True, (200,200,200))
+            exitText = self.font.render("Press ESC or Click to go back to Selection Screen", True, (200,200,200))
 
             cx = surface.get_width() // 2
 

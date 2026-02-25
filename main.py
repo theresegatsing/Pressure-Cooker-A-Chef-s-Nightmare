@@ -33,10 +33,11 @@ def main():
                 RUNNING = False
 
             if state == "selection":
-                selected_path = selectionScreen.handleEvent(event)
+                result = selectionScreen.handleEvent(event)
 
-                if selected_path:
-                    game = Game(selected_path, 0)
+                if result:
+                    image_path, points = result
+                    game = Game(image_path, points)
                     state = "game"
 
             elif state == "game":
