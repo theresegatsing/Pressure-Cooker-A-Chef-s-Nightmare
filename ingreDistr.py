@@ -29,7 +29,14 @@ class IngredientDistribution(object):
         self.load_ingredients()
         self.engine = GameEngine(self.ingredients)
 
-   
+    def make_grey(image):
+        grey = image.copy()
+        arr = pygame.surfarray.pixels3d(grey)
+        avg = arr.mean(axis=2, keepdims=True)
+        arr[:] = avg
+        del arr
+        return grey
+
     def load_ingredients(self):
 
         if not os.path.isdir(self.mealPath):
