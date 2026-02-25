@@ -11,6 +11,10 @@ class Game(object):
         self.points = points
         self.state = IngredientDistribution(image_path)
 
+        self.timeLimit = 90.0
+        self.elapsed = 0.0
+        self.finished = False
+
     def handleEvent(self, event):
         self.state.handleEvent(event)
 
