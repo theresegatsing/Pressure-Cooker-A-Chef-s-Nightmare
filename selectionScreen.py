@@ -60,7 +60,7 @@ class SelectionScreen(object):
 
 
     def draw(self, surface):
-        surface.fill((0, 0, 0))
+      # surface.fill((0, 0, 0))
         self.background.draw(surface)
 
         for card in self.selectedCards:

@@ -8,11 +8,11 @@ class World(object):
 
     def __init__(self):
 
-        self.background = Drawable((0,0), "t2.png")
-        self.background.image = pygame.transform.scale(
-           self.background.image,
-           pyVec(WORLD_SIZE)
-       )
+        self.tree = Drawable((0,0), "t2.png")
+        self.tree.image = pygame.transform.scale(
+            self.tree.image,
+            pyVec(WORLD_SIZE)
+        )
 
     def handleEvent(self, event):
         pass
@@ -21,5 +21,6 @@ class World(object):
         pass
  
     def draw(self, surface):
+        surface.fill((255,0,0))
 
-        self.background.draw(surface)
+     #  self.tree.draw(surface)

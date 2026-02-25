@@ -13,6 +13,12 @@ class IngredientDistribution(object):
 
     def __init__(self, imageCard):
 
+        self.tree = Drawable((0,0), "t2.png")
+        self.tree.image = pygame.transform.scale(
+            self.tree.image,
+            pyVec(WORLD_SIZE)
+        )
+
         self.imageCard = imageCard
 
         self.allMeals = ["burger", "hotdog", "ramen"]
@@ -80,7 +86,7 @@ class IngredientDistribution(object):
     def draw(self, surface):
 
         surface.fill((255, 255, 255))
-
+        self.tree.draw(surface)
 
         for ing in self.ingredients:
             if not ing["collected"]:
@@ -103,5 +109,5 @@ class IngredientDistribution(object):
             x_offset -= icon_size
             surface.blit(small_icon, (x_offset, 10))
             x_offset -= padding
-            
+
         self.engine.draw(surface)
