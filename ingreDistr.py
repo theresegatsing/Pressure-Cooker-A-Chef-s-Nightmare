@@ -57,6 +57,7 @@ class IngredientDistribution(object):
 
             full_path = os.path.join(self.mealPath, filename)
             image = pygame.image.load(full_path).convert_alpha()
+            image.set_colorkey((255,255,255))
 
             MAX_SIZE = 50
             w, h = image.get_size()
@@ -89,7 +90,6 @@ class IngredientDistribution(object):
    
     def draw(self, surface):
 
-        surface.fill((255, 255, 255))
         self.tree.draw(surface)
 
         for ing in self.ingredients:
