@@ -57,7 +57,24 @@ class IngredientDistribution(object):
 
             full_path = os.path.join(self.mealPath, filename)
             image = pygame.image.load(full_path).convert_alpha()
-            image.set_colorkey((255,255,255))
+
+            # Remove near-white background pixels
+            arr_rgb = pygame.surfarray.pixels3d(image)
+            arr_alpha = pygame.surfarray.pixels_alpha(image)
+
+            # Detect near-white pixels
+            white = (
+                (arr_rgb[:, :, 0] > 240) &
+                (arr_rgb[:, :, 1] > 240) &
+                (arr_rgb[:, :, 2] > 240)
+            )
+
+            arr_alpha[white] = 0
+
+            del arr_rgb
+            del arr_alpha
+
+            # Scale down the image if it's too large
 
             MAX_SIZE = 50
             w, h = image.get_size()
@@ -66,10 +83,11 @@ class IngredientDistribution(object):
                 image, (int(w * scale), int(h * scale))
             )
 
+            image.set_colorkey((255,255,255), pygame.RLEACCEL)
+
             x = random.randint(0, WORLD_SIZE[0] - image.get_width())
             y = random.randint(0, WORLD_SIZE[1] - image.get_height())
 
-            #self.ingredients.append((image, vec(x, y)))
             grey = self.make_grey(image)
 
             self.ingredients.append({
