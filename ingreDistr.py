@@ -1,4 +1,7 @@
 # ingreDistr.py
+from math import dist
+from pydoc import text
+
 import pygame
 import os
 import random
@@ -110,6 +113,7 @@ class IngredientDistribution(object):
 
         self.tree.draw(surface)
 
+
         for ing in self.ingredients:
             if not ing["collected"]:
                 surface.blit(
@@ -132,4 +136,13 @@ class IngredientDistribution(object):
             surface.blit(small_icon, (x_offset, 10))
             x_offset -= padding
 
+
+        dist = self.engine.nearest_distance
+
+        if dist is not None:
+            feet = round(dist / 20)  # convert pixels to feet
+            text = self.font.render(f"Nearest ingredient {feet} ft away", True, (255,255,255))
+            surface.blit(text, (10, 40))
+
+    
         self.engine.draw(surface)

@@ -22,11 +22,15 @@ class GameEngine(object):
         #for detecting when the chef changes direction
         self.prev_velocity = vec(0,0)
 
+        self.nearest_distance = None
+        self.font = pygame.font.SysFont(None, 24)
+
        
 
     def draw(self, drawSurface):
         
         self.chef.draw(drawSurface)
+
             
     def handleEvent(self, event):        
 
@@ -41,11 +45,10 @@ class GameEngine(object):
         #detect turning
         if curVelocity[0] != self.prev_velocity[0] or curVelocity[1] != self.prev_velocity[1]:
 
-            dist = self.nearestIngredientDistance()
-
-            feet = round(dist / 20)
-            if dist != None:
-                print(f"Nearest ingredient: {feet} feet away")
+        
+            self.nearest_distance = self.nearestIngredientDistance()
+            #if dist != None:
+            #    print(f"Nearest ingredient: {feet} feet away")
         
         self.prev_velocity = vec(curVelocity[0], curVelocity[1])
 
