@@ -2,10 +2,12 @@ import pygame
 from drawable import Drawable
 from mobile import Mobile, Player
 from os.path import join
-from vector import vec, pyVec
+from vector import vec, pyVec, magnitude
 from animated import Animated
 from constants import *
 import random 
+ 
+
 
 class GameEngine(object):
 
@@ -73,4 +75,21 @@ class GameEngine(object):
         for i in range (2):
              Drawable.CAMERA_OFFSET[i] = max(min(Drawable.CAMERA_OFFSET[i], WORLD_SIZE[i] - RESOLUTION[i]), 
                                               0)
+    
+
+    def nearestIngredientDistance(self):
+        chef_pos = self.chef.getPosition()
+        min_dist = float('inf')
         
+        for ing in self.collidables:
+            if ing["collected"]:
+                continue
+
+            dist = magnitude(ing["pos"] - chef_pos)
+
+            if dist < min_dist:
+                min_dist = dist
+        
+        if min_dist == float('inf'):
+            return None
+        return min_dist

@@ -1,6 +1,5 @@
 import numpy as np
 from pygame import Rect
-from vector import magnitude
 
 def vec(*args):
     """Quick function for making numpy array vectors."""
