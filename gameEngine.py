@@ -41,7 +41,11 @@ class GameEngine(object):
         #detect turning
         if curVelocity != self.prev_velocity:
             dist = self.nearestIngredientDistance()
-            
+
+            if dist != None:
+                print(f"Nearest ingredient: {int(dist)} units away")
+        
+        self.prev_velocity = curVelocity.copy()
 
         if self.chef.getPosition()[0] <= 0:
             self.chef.velocity[0] = 0
