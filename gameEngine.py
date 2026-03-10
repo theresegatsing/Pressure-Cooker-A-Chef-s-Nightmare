@@ -19,6 +19,9 @@ class GameEngine(object):
 
         self.collidables = ingredients
 
+        #for detecting when the chef changes direction
+        self.prev_velocity = vec(0,0)
+
        
 
     def draw(self, drawSurface):
