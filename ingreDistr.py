@@ -42,6 +42,9 @@ class IngredientDistribution(object):
         self.load_ingredients()
         self.engine = GameEngine(self.ingredients)
 
+        self.font = pygame.font.SysFont(None, 24)
+
+
     def make_grey(self, image):
         grey = image.copy()
         arr = pygame.surfarray.pixels3d(grey)

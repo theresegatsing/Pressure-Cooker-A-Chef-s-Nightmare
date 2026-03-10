@@ -23,7 +23,6 @@ class GameEngine(object):
         self.prev_velocity = vec(0,0)
 
         self.nearest_distance = None
-        self.font = pygame.font.SysFont(None, 24)
 
        
 
