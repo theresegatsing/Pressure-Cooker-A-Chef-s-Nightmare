@@ -43,8 +43,9 @@ class GameEngine(object):
 
             dist = self.nearestIngredientDistance()
 
+            feet = round(dist / 20)
             if dist != None:
-                print(f"Nearest ingredient: {int(dist)} units away")
+                print(f"Nearest ingredient: {feet} feet away")
         
         self.prev_velocity = vec(curVelocity[0], curVelocity[1])
 
@@ -99,7 +100,12 @@ class GameEngine(object):
             if ing["collected"]:
                 continue
 
-            dist = magnitude(ing["pos"] - chef_pos)
+            ing_center = ing["pos"] + vec(
+                ing["image"].get_width()/2,
+                ing["image"].get_height()/2
+            )
+
+            dist = magnitude(ing_center - chef_pos)
 
             if dist < min_dist:
                 min_dist = dist
