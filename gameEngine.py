@@ -92,7 +92,7 @@ class GameEngine(object):
     
 
     def nearestIngredientDistance(self):
-        chef_pos = self.chef.getPosition()
+        chef_pos = self.chef.getPosition() + self.chef.getSize() / 2
         min_dist = float('inf')
         
         for ing in self.collidables:
