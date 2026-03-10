@@ -42,7 +42,7 @@ class IngredientDistribution(object):
         self.load_ingredients()
         self.engine = GameEngine(self.ingredients)
 
-        self.font = pygame.font.SysFont(None, 24)
+        self.font = pygame.font.SysFont(None, 18)
 
 
     def make_grey(self, image):
@@ -145,7 +145,9 @@ class IngredientDistribution(object):
         if dist is not None:
             feet = round(dist / 20)  # convert pixels to feet
             text = self.font.render(f"Nearest ingredient {feet} ft away", True, (255,255,255))
-            surface.blit(text, (10, 40))
+            x = surface.get_width() - text.get_width() - 10
+            y = surface.get_height() - text.get_height() - 10
+            surface.blit(text, (x, y))
 
     
         self.engine.draw(surface)
