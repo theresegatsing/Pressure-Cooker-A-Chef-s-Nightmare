@@ -36,6 +36,12 @@ class GameEngine(object):
     def update(self, seconds):
         self.chef.update(seconds)
 
+        curVelocity = self.chef.velocity
+
+        #detect turning
+        if curVelocity != self.prev_velocity:
+            dist = self.nearestIngredientDistance()
+            
 
         if self.chef.getPosition()[0] <= 0:
             self.chef.velocity[0] = 0
