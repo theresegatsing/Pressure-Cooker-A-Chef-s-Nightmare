@@ -113,7 +113,7 @@ class IngredientDistribution(object):
     def update(self, seconds):
         self.engine.update(seconds)
 
-   
+    """ 
     def draw(self, surface):
 
         self.tree.draw(surface)
@@ -152,4 +152,64 @@ class IngredientDistribution(object):
             surface.blit(text, (x, y))
 
     
+        self.engine.draw(surface)
+
+    """
+
+    def draw(self, surface):
+
+        self.tree.draw(surface)
+
+        for ing in self.ingredients:
+            if not ing["collected"]:
+                surface.blit(
+                    ing["image"],
+                    pyVec(ing["pos"] - Drawable.CAMERA_OFFSET)
+                )
+
+        icon_size = 30
+        padding = 10
+        x_offset = RESOLUTION[0] - padding
+
+        for ing in reversed(self.ingredients):
+
+            icon = ing["image"] if ing["collected"] else ing["grey"]
+            small_icon = pygame.transform.smoothscale(icon, (icon_size, icon_size))
+
+            x_offset -= icon_size
+            surface.blit(small_icon, (x_offset, 10))
+
+            # draw upgrade dots
+            level = ing.get("upgrade_level", 0)
+
+            for i in range(3):
+
+                if i <= level:
+                    color = (255,255,255)   # filled dot
+                else:
+                    color = (80,80,80)      # empty dot
+
+                pygame.draw.circle(
+                    surface,
+                    color,
+                    (x_offset + 6 + i*10, 45),
+                    3
+                )
+
+            x_offset -= padding
+
+
+        dist = self.engine.nearest_distance
+
+        if dist is not None:
+            feet = round(dist / 20)
+            text = self.font.render(
+                f"Nearest ingredient {feet} ft away",
+                True,
+                (255,255,255)
+            )
+            x = surface.get_width() - text.get_width() - 10
+            y = surface.get_height() - text.get_height() - 10
+            surface.blit(text, (x, y))
+
         self.engine.draw(surface)

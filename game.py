@@ -15,8 +15,8 @@ class Game(object):
 
         self.state = IngredientDistribution(image_path)
 
-        self.timeLimit = 60.0 # seconds
-        self.timeLeft = 60.0
+        self.timeLimit = 120# seconds
+        self.timeLeft = 120.0
 
         self.finished = False  # tells main to return to selection
         self.endScreen = False # shows popup with time taken and score

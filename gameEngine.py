@@ -2,7 +2,7 @@ import pygame
 from drawable import Drawable
 from mobile import Mobile, Player
 from os.path import join
-from vector import vec, pyVec, magnitude
+from vector import scale, vec, pyVec, magnitude
 from animated import Animated
 from constants import *
 import random 
@@ -91,8 +91,14 @@ class GameEngine(object):
                     new_x = random.randint(0, WORLD_SIZE[0] - image.get_width())
                     new_y = random.randint(0, WORLD_SIZE[1] - image.get_height())
 
+                    scale = 1 + 0.2 * (ing["upgrade_level"] + 1)
+
+                    new_img = pygame.transform.rotozoom(
+                        ing["image"], 0, scale
+                    )
+
                     new_ing = {
-                        "image": image,
+                        "image": new_img,
                         "grey": ing["grey"],
                         "pos": vec(new_x, new_y),
                         "collected": False,
