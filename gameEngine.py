@@ -34,6 +34,7 @@ class GameEngine(object):
     def handleEvent(self, event):        
 
         self.chef.handleEvent(event)        
+        
     
     
     def update(self, seconds):

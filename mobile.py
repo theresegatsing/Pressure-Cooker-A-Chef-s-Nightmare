@@ -34,6 +34,12 @@ class Player(Mobile):
     def handleEvent(self, event):
         if event.type in (KEYDOWN, KEYUP) and event.key in self.keyMap.keys():
             self.keyMap[event.key] = event.type == KEYDOWN
+        
+        if event.type == KEYDOWN:
+            if event.key == K_LEFT:
+                self.flipImage[0] = True
+            elif event.key == K_RIGHT:
+                self.flipImage[0] = False
     
     def update(self, seconds):
         if self.keyMap[K_LEFT] or self.keyMap[K_RIGHT]:

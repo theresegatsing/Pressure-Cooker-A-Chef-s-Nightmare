@@ -1,3 +1,4 @@
+import pygame
 from pygame import image, Surface, SRCALPHA
 from os.path import join
 from vector import vec, pyVec, rectAdd
@@ -19,8 +20,10 @@ class Drawable(object):
         self.position=vec(*position)
         
     
-    def draw(self, drawSurface):        
-        drawSurface.blit(self.image, pyVec(self.position - Drawable.CAMERA_OFFSET))
+    def draw(self, drawSurface):     
+        blitImage = pygame.transform.flip(self.image, *self.flipImage)
+        drawSurface.blit(blitImage, list(map(int, self.position - Drawable.CAMERA_OFFSET)))
+         
          
     def getSize(self):
         return vec(*self.image.get_size())    
