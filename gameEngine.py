@@ -34,7 +34,7 @@ class GameEngine(object):
     def handleEvent(self, event):        
 
         self.chef.handleEvent(event)        
-        
+
     
     
     def update(self, seconds):
@@ -85,6 +85,22 @@ class GameEngine(object):
 
             if chefRect.colliderect(ingRect):
                 ing["collected"] = True
+
+                #upgrade if possible
+                if ing["upgrade_level"] < 2:
+                    new_x = random.randint(0, WORLD_SIZE[0] - image.get_width())
+                    new_y = random.randint(0, WORLD_SIZE[1] - image.get_height())
+
+                    new_ing = {
+                        "image": image,
+                        "grey": ing["grey"],
+                        "pos": vec(new_x, new_y),
+                        "collected": False,
+                        "upgrade_level" : ing["upgrade_level"] + 1,
+                        "points": ing["points"] * 2
+                    }
+
+                    self.collidables.append(new_ing)
 
 
 
