@@ -86,28 +86,25 @@ class GameEngine(object):
             if chefRect.colliderect(ingRect):
                 ing["collected"] = True
 
-                #upgrade if possible
-                if ing["upgrade_level"] < 2:
-                    new_x = random.randint(0, WORLD_SIZE[0] - image.get_width())
-                    new_y = random.randint(0, WORLD_SIZE[1] - image.get_height())
+                
+                ing["upgrade_level"] += 1
+                ing["points"] *= 2
 
-                    scale = 1 + 0.2 * (ing["upgrade_level"] + 1)
+                # upgrade if possible
+                if ing["upgrade_level"] < 3:
 
-                    new_img = pygame.transform.rotozoom(
+
+                    scale = 1 + 0.2 * ing["upgrade_level"]
+
+                    ing["image"] = pygame.transform.rotozoom(
                         ing["image"], 0, scale
                     )
 
-                    new_ing = {
-                        "image": new_img,
-                        "grey": ing["grey"],
-                        "pos": vec(new_x, new_y),
-                        "collected": False,
-                        "upgrade_level" : ing["upgrade_level"] + 1,
-                        "points": ing["points"] * 2
-                    }
+                    new_x = random.randint(0, WORLD_SIZE[0] - ing["image"].get_width())
+                    new_y = random.randint(0, WORLD_SIZE[1] - ing["image"].get_height())
 
-                    self.collidables.append(new_ing)
-
+                    ing["pos"] = vec(new_x, new_y)
+                    ing["collected"] = False
 
 
         Drawable.CAMERA_OFFSET = self.chef.getPosition() + self.chef.getSize() /2 -  RESOLUTION /2

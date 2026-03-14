@@ -184,7 +184,7 @@ class IngredientDistribution(object):
 
             for i in range(3):
 
-                if i <= level:
+                if i < level:
                     color = (255,255,255)   # filled dot
                 else:
                     color = (80,80,80)      # empty dot
