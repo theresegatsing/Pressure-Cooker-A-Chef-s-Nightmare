@@ -45,6 +45,9 @@ class IngredientDistribution(object):
         self.load_ingredients()
         self.pointsPerIngredient = thresholdPoints // len(self.ingredients)
 
+        for ing in self.ingredients:
+            ing["points"] = self.pointsPerIngredient
+
         self.engine = GameEngine(self.ingredients, self)
 
         self.font = pygame.font.SysFont(None, 18)
@@ -107,7 +110,7 @@ class IngredientDistribution(object):
                 "pos": vec(x, y),
                 "collected": False,
                 "upgrade_level" : 0,
-                "points": 10
+                "points": 0
             })
 
     
@@ -168,7 +171,7 @@ class IngredientDistribution(object):
         )
 
         surface.blit(scoreText, (10, surface.get_height() - 25))
-        
+
         dist = self.engine.nearest_distance
 
         if dist is not None:

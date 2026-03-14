@@ -87,11 +87,11 @@ class GameEngine(object):
             if chefRect.colliderect(ingRect):
                 ing["collected"] = True
 
-                self.distribution.currentPoints += self.distribution.pointsPerIngredient
+                self.distribution.currentPoints += ing["points"]
                 
                 ing["upgrade_level"] += 1
-                ing["points"] *= 2
-
+                ing["points"] /=4
+                
                 # upgrade if possible
                 if ing["upgrade_level"] < 3:
 
