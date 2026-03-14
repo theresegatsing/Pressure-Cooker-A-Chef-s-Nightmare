@@ -43,7 +43,9 @@ class IngredientDistribution(object):
         self.engine = None
 
         self.load_ingredients()
-        self.engine = GameEngine(self.ingredients)
+        self.pointsPerIngredient = thresholdPoints // len(self.ingredients)
+
+        self.engine = GameEngine(self.ingredients, self)
 
         self.font = pygame.font.SysFont(None, 18)
 
@@ -159,7 +161,14 @@ class IngredientDistribution(object):
 
             x_offset -= padding
 
+        scoreText = self.font.render(
+            f"{self.currentPoints} / {self.thresholdPoints} points",
+            True,
+            (255,255,255)
+        )
 
+        surface.blit(scoreText, (10, surface.get_height() - 25))
+        
         dist = self.engine.nearest_distance
 
         if dist is not None:

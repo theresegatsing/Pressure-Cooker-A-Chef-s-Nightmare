@@ -11,13 +11,14 @@ import random
 
 class GameEngine(object):
 
-    def __init__(self, ingredients):
+    def __init__(self, ingredients, distribution):
         self.chef = Player((0,0), "chef.png", (0,0))
         self.chef.animate = True
        
         self.chefSpeed = 100
 
         self.collidables = ingredients
+        self.distribution = distribution
 
         #for detecting when the chef changes direction
         self.prev_velocity = vec(0,0)
@@ -81,11 +82,12 @@ class GameEngine(object):
                 pos[1],
                 image.get_width(),
                 image.get_height()
-            )
+            ) 
 
             if chefRect.colliderect(ingRect):
                 ing["collected"] = True
 
+                self.distribution.currentPoints += self.distribution.pointsPerIngredient
                 
                 ing["upgrade_level"] += 1
                 ing["points"] *= 2
