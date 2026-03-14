@@ -14,7 +14,7 @@ PATH = "game sprites"
 
 class IngredientDistribution(object):
 
-    def __init__(self, imageCard):
+    def __init__(self, imageCard, thresholdPoints):
 
         #Drawing the background
 
@@ -27,6 +27,9 @@ class IngredientDistribution(object):
 
         # Storing the image card for later use in determining which meal to load
         self.imageCard = imageCard
+        self.thresholdPoints = thresholdPoints
+        self.currentPoints = 0
+
 
         self.allMeals = ["burger", "hotdog", "ramen"]
         self.mealPath = ""
@@ -113,48 +116,6 @@ class IngredientDistribution(object):
     def update(self, seconds):
         self.engine.update(seconds)
 
-    """ 
-    def draw(self, surface):
-
-        self.tree.draw(surface)
-
-
-        for ing in self.ingredients:
-            if not ing["collected"]:
-                surface.blit(
-                    ing["image"],
-                    pyVec(ing["pos"] - Drawable.CAMERA_OFFSET)
-                )
-        
-        icon_size = 30
-        padding = 10
-        x_offset = RESOLUTION[0] - padding
-
-        for ing in reversed(self.ingredients):
-
-            icon = ing["image"] if ing["collected"] else ing["grey"]
-            small_icon = pygame.transform.smoothscale(
-                icon, (icon_size, icon_size)
-            )
-
-            x_offset -= icon_size
-            surface.blit(small_icon, (x_offset, 10))
-            x_offset -= padding
-
-
-        dist = self.engine.nearest_distance
-
-        if dist is not None:
-            feet = round(dist / 20)  # convert pixels to feet
-            text = self.font.render(f"Nearest ingredient {feet} ft away", True, (255,255,255))
-            x = surface.get_width() - text.get_width() - 10
-            y = surface.get_height() - text.get_height() - 10
-            surface.blit(text, (x, y))
-
-    
-        self.engine.draw(surface)
-
-    """
 
     def draw(self, surface):
 

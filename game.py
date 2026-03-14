@@ -13,7 +13,7 @@ class Game(object):
         self.image_path = image_path
         self.points = points
 
-        self.state = IngredientDistribution(image_path)
+        self.state = IngredientDistribution(image_path, points)
 
         self.timeLimit = 120# seconds
         self.timeLeft = 120.0
