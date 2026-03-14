@@ -13,29 +13,9 @@ class Drawable(object):
         if fileName != "":
             sm = SpriteManager.getInstance()
             self.image = sm.getSprite(fileName, offset)
+        
+        self.flipImage = [False, False]
 
-            """
-            self.image = image.load(fileName)
-
-            
-            if transparency:
-                if offset is None:
-                    self.image = self.image.convert_alpha()
-                else:
-                    surf = Surface(offset.size, SRCALPHA, 32)
-                    surf.blit(self.image, (0,0), offset)
-                    self.image = surf
-            else:
-                if offset is not None:
-                    surf = Surface(offset.size)
-                    surf.blit(self.image, (0,0), offset)
-                    self.image = surf
-            
-            if colorkey:
-                self.image.set_colorkey(self.image.get_at((0,0)))
-                    
-            
-        """
         self.position=vec(*position)
         
     
