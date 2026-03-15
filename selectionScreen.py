@@ -8,6 +8,7 @@ import random
 from vector import vec
 from game import Game
 from ingreDistr import IngredientDistribution
+from constants import *
 
 SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 350
