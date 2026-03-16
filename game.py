@@ -1,5 +1,5 @@
 import pygame
-from vector import vec, pyVec
+from vector import vec
 from ingreDistr import IngredientDistribution
 from selectionScreen import *
 
@@ -34,10 +34,11 @@ class Game(object):
 
         cx = SCREEN_WIDTH // 2
 
+        # Buttons moved higher
         self.buttons = {
-            "replay": pygame.Rect(cx-80, 240, 160, 35),
-            "continue": pygame.Rect(cx-80, 285, 160, 35),
-            "menu": pygame.Rect(cx-80, 330, 160, 35)
+            "replay": pygame.Rect(cx-80, 170, 160, 30),
+            "continue": pygame.Rect(cx-80, 205, 160, 30),
+            "menu": pygame.Rect(cx-80, 240, 160, 30)
         }
 
     def handleEvent(self, event):
@@ -48,7 +49,6 @@ class Game(object):
 
                 mouse = vec(*event.pos) // SCALE
 
-                # FAILURE OPTIONS
                 if self.result == "fail":
 
                     if self.buttons["replay"].collidepoint(mouse):
@@ -62,7 +62,6 @@ class Game(object):
                     elif self.buttons["menu"].collidepoint(mouse):
                         self.finished = True
 
-                # SUCCESS OPTIONS
                 else:
 
                     if self.buttons["continue"].collidepoint(mouse):
@@ -129,7 +128,7 @@ class Game(object):
                 (0,0,0)
             )
 
-            surface.blit(timerText,(10,10))
+            surface.blit(timerText, (10,10))
 
         else:
 
@@ -139,15 +138,20 @@ class Game(object):
 
             cx = surface.get_width() // 2
 
-          # title = self.font.render("Round Complete!",True,(255,255,255))
-            timeText = self.font.render(f"Time Taken: {round(self.timeTaken,1)}",True,(255,255,255))
-            scoreText = self.font.render(f"Score: {self.score} / {self.points}",True,(255,255,255))
+            # INFO TEXT
+            timeText = self.font.render(
+                f"Time Taken: {round(self.timeTaken,1)}",
+                True,(255,255,255)
+            )
 
-        #   surface.blit(title,(cx-90,120))
-            surface.blit(timeText,(cx-90,160))
-            surface.blit(scoreText,(cx-90,190))
+            scoreText = self.font.render(
+                f"Score: {self.score} / {self.points}",
+                True,(255,255,255)
+            )
 
-            # FAILURE SCREEN
+            surface.blit(timeText,(cx-80,90))
+            surface.blit(scoreText,(cx-80,110))
+
             if self.result == "fail":
 
                 msg = self.font.render(
@@ -155,7 +159,7 @@ class Game(object):
                     True,(255,200,200)
                 )
 
-                surface.blit(msg,(cx-160,215))
+                surface.blit(msg,(cx-150,135))
 
                 pygame.draw.rect(surface,(120,120,255),self.buttons["replay"])
                 pygame.draw.rect(surface,(120,200,120),self.buttons["continue"])
@@ -165,11 +169,19 @@ class Game(object):
                 pygame.draw.rect(surface,(255,255,255),self.buttons["continue"],2)
                 pygame.draw.rect(surface,(255,255,255),self.buttons["menu"],2)
 
-                surface.blit(self.font.render("Replay Level",True,(0,0,0)),(cx-50,248))
-                surface.blit(self.font.render("Continue",True,(0,0,0)),(cx-35,293))
-                surface.blit(self.font.render("Main Menu",True,(0,0,0)),(cx-45,338))
+                replay_text = self.font.render("Replay Level",True,(0,0,0))
+                cont_text = self.font.render("Continue",True,(0,0,0))
+                menu_text = self.font.render("Main Menu",True,(0,0,0))
 
-            # SUCCESS SCREEN
+                surface.blit(replay_text,
+                    replay_text.get_rect(center=self.buttons["replay"].center))
+
+                surface.blit(cont_text,
+                    cont_text.get_rect(center=self.buttons["continue"].center))
+
+                surface.blit(menu_text,
+                    menu_text.get_rect(center=self.buttons["menu"].center))
+
             else:
 
                 msg = self.font.render(
@@ -177,7 +189,7 @@ class Game(object):
                     True,(200,255,200)
                 )
 
-                surface.blit(msg,(cx-140,215))
+                surface.blit(msg,(cx-140,135))
 
                 pygame.draw.rect(surface,(120,200,120),self.buttons["continue"])
                 pygame.draw.rect(surface,(200,120,120),self.buttons["menu"])
@@ -185,5 +197,11 @@ class Game(object):
                 pygame.draw.rect(surface,(255,255,255),self.buttons["continue"],2)
                 pygame.draw.rect(surface,(255,255,255),self.buttons["menu"],2)
 
-                surface.blit(self.font.render("Next Level",True,(0,0,0)),(cx-45,293))
-                surface.blit(self.font.render("Main Menu",True,(0,0,0)),(cx-45,338))
+                cont_text = self.font.render("Next Level",True,(0,0,0))
+                menu_text = self.font.render("Main Menu",True,(0,0,0))
+
+                surface.blit(cont_text,
+                    cont_text.get_rect(center=self.buttons["continue"].center))
+
+                surface.blit(menu_text,
+                    menu_text.get_rect(center=self.buttons["menu"].center))
