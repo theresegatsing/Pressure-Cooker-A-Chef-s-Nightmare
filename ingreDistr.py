@@ -167,7 +167,7 @@ class IngredientDistribution(object):
         scoreText = self.font.render(
             f"{self.currentPoints} / {self.thresholdPoints} points",
             True,
-            (255,255,255)
+            (0,0,0)
         )
 
         surface.blit(scoreText, (10, surface.get_height() - 25))
@@ -179,7 +179,7 @@ class IngredientDistribution(object):
             text = self.font.render(
                 f"Nearest ingredient {feet} ft away",
                 True,
-                (255,255,255)
+                (0,0,0)
             )
             x = surface.get_width() - text.get_width() - 10
             y = surface.get_height() - text.get_height() - 10
