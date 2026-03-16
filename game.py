@@ -82,7 +82,7 @@ class Game(object):
 
             title = self.font.render("Round Complete!", True, (255,255,255))
             timeText = self.font.render(f"Time Taken: {round(self.timeTaken,1)}", True, (255,255,255))
-            scoreText = self.font.render(f"Score: {self.score}", True, (255,255,255))
+            scoreText = self.font.render(f"Score: {self.score} / {self.points}", True, (255,255,255))
             exitText = self.font.render("Press ESC or Click to go back to Selection Screen", True, (200,200,200))
 
             cx = surface.get_width() // 2
