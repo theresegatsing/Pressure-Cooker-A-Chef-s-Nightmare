@@ -17,8 +17,8 @@ class Game(object):
 
         self.state = IngredientDistribution(image_path, points)
 
-        self.timeLimit = 40
-        self.timeLeft = 40.0
+        self.timeLimit = 120
+        self.timeLeft = 120
 
         self.finished = False
         self.replay = False
