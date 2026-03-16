@@ -138,11 +138,11 @@ class Game(object):
 
             cx = surface.get_width() // 2
 
-            title = self.font.render("Round Complete!",True,(255,255,255))
+           #title = self.font.render("Round Complete!",True,(255,255,255))
             timeText = self.font.render(f"Time Taken: {round(self.timeTaken,1)}",True,(255,255,255))
             scoreText = self.font.render(f"Score: {self.score} / {self.points}",True,(255,255,255))
 
-            surface.blit(title,(cx-90,120))
+           #surface.blit(title,(cx-90,120))
             surface.blit(timeText,(cx-90,160))
             surface.blit(scoreText,(cx-90,190))
 

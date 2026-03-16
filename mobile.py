@@ -5,10 +5,9 @@ from pygame.locals import *
 from constants import *
 
 class Mobile(Animated):
-    def __init__(self, position, fileName="", offset=None, maxSpeed=100):
+    def __init__(self, position, fileName="", offset=None, maxSpeed=200):
         super().__init__(position, fileName, offset)
-    #   self.velocity = vec(0,0)
-        self.velocity = vec(WORLD_SIZE[0]//2, WORLD_SIZE[1]//2)
+        self.velocity = vec(0,0)
     
         self.maxSpeed = maxSpeed
     
