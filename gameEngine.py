@@ -1,4 +1,5 @@
 import pygame
+from wcwidth import center
 from drawable import Drawable
 from mobile import Mobile, Player
 from os.path import join
@@ -12,7 +13,10 @@ import random
 class GameEngine(object):
 
     def __init__(self, ingredients, distribution):
-        self.chef = Player((0,0), "chef.png", (0,0))
+
+        center = vec(WORLD_SIZE[0]//2, WORLD_SIZE[1]//2)
+        self.chef = Player(center, "chef.png", (0,0))
+      #  self.chef = Player((0,0), "chef.png", (0,0))
         self.chef.animate = True
        
         self.chefSpeed = 100
