@@ -1,3 +1,5 @@
+from cmath import rect
+
 import pygame
 from wcwidth import center
 from drawable import Drawable
@@ -33,12 +35,22 @@ class GameEngine(object):
 
        
 
-    def draw(self, drawSurface):
+ #   def draw(self, drawSurface):
         
-        self.chef.draw(drawSurface)
-        pygame.draw.rect(drawSurface, (255,200,0), self.chef.getCollisionRect(), 2)
+ #       self.chef.draw(drawSurface)
+ #       pygame.draw.rect(drawSurface, (255,200,0), self.chef.getCollisionRect(), 2)
 
-            
+    def draw(self, drawSurface):
+
+        rect = self.chef.getCollisionRect()
+
+        shadow_rect = rect.copy()
+        shadow_rect.move_ip(4, 6)
+
+        pygame.draw.ellipse(drawSurface, (0,0,0), shadow_rect)
+
+        self.chef.draw(drawSurface)        
+    
     def handleEvent(self, event):        
 
         self.chef.handleEvent(event)        
