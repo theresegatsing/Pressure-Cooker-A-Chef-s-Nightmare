@@ -38,7 +38,12 @@ class GameEngine(object):
     def draw(self, drawSurface):
         
         self.chef.draw(drawSurface)
-        pygame.draw.rect(drawSurface, (255,200,0), self.chef.getCollisionRect(), 2)
+
+        if self.flash_timer > 0:
+            flash = pygame.Surface((RESOLUTION[0], RESOLUTION[1]))
+            flash.fill((255,255,200))
+            flash.set_alpha(40)
+            drawSurface.blit(flash, (0,0))
 
     
     def handleEvent(self, event):        
@@ -88,7 +93,8 @@ class GameEngine(object):
         for ing in self.collidables:   
             if ing["collected"]:
                 continue
-
+            
+            self.flash_timer = 0.15
             pos = ing["pos"]
             image = ing["image"]
 
