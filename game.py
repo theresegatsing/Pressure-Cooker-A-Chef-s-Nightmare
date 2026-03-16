@@ -5,6 +5,7 @@ from selectionScreen import *
 
 SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 350
+SCALE = 2
 
 
 class Game(object):
@@ -20,6 +21,7 @@ class Game(object):
         self.timeLeft = 40.0
 
         self.finished = False
+        self.replay = False
         self.endScreen = False
 
         self.timeTaken = 0
@@ -30,7 +32,6 @@ class Game(object):
 
         self.font = pygame.font.SysFont(None, 22)
 
-        # Buttons
         cx = SCREEN_WIDTH // 2
 
         self.buttons = {
@@ -45,28 +46,28 @@ class Game(object):
 
             if event.type == pygame.MOUSEBUTTONDOWN:
 
-                mouse = event.pos
+                mouse = vec(*event.pos) // SCALE
 
-                # FAILED ROUND
+                # FAILURE OPTIONS
                 if self.result == "fail":
 
                     if self.buttons["replay"].collidepoint(mouse):
-                        self.finished = True
                         self.replay = True
+                        self.finished = True
 
                     elif self.buttons["continue"].collidepoint(mouse):
-                        self.finished = True
                         self.timeLimit -= self.timeChange
+                        self.finished = True
 
                     elif self.buttons["menu"].collidepoint(mouse):
                         self.finished = True
 
-                # SUCCESS ROUND
+                # SUCCESS OPTIONS
                 else:
 
                     if self.buttons["continue"].collidepoint(mouse):
-                        self.finished = True
                         self.timeLimit += self.timeChange
+                        self.finished = True
 
                     elif self.buttons["menu"].collidepoint(mouse):
                         self.finished = True
@@ -138,11 +139,11 @@ class Game(object):
 
             cx = surface.get_width() // 2
 
-           #title = self.font.render("Round Complete!",True,(255,255,255))
+          # title = self.font.render("Round Complete!",True,(255,255,255))
             timeText = self.font.render(f"Time Taken: {round(self.timeTaken,1)}",True,(255,255,255))
             scoreText = self.font.render(f"Score: {self.score} / {self.points}",True,(255,255,255))
 
-           #surface.blit(title,(cx-90,120))
+        #   surface.blit(title,(cx-90,120))
             surface.blit(timeText,(cx-90,160))
             surface.blit(scoreText,(cx-90,190))
 
@@ -160,9 +161,13 @@ class Game(object):
                 pygame.draw.rect(surface,(120,200,120),self.buttons["continue"])
                 pygame.draw.rect(surface,(200,120,120),self.buttons["menu"])
 
+                pygame.draw.rect(surface,(255,255,255),self.buttons["replay"],2)
+                pygame.draw.rect(surface,(255,255,255),self.buttons["continue"],2)
+                pygame.draw.rect(surface,(255,255,255),self.buttons["menu"],2)
+
                 surface.blit(self.font.render("Replay Level",True,(0,0,0)),(cx-50,248))
-                surface.blit(self.font.render("Continue",True,(0,0,0)),(cx-35,292))
-                surface.blit(self.font.render("Main Menu",True,(0,0,0)),(cx-45,337))
+                surface.blit(self.font.render("Continue",True,(0,0,0)),(cx-35,293))
+                surface.blit(self.font.render("Main Menu",True,(0,0,0)),(cx-45,338))
 
             # SUCCESS SCREEN
             else:
@@ -177,5 +182,8 @@ class Game(object):
                 pygame.draw.rect(surface,(120,200,120),self.buttons["continue"])
                 pygame.draw.rect(surface,(200,120,120),self.buttons["menu"])
 
-                surface.blit(self.font.render("Next Level",True,(0,0,0)),(cx-45,292))
-                surface.blit(self.font.render("Main Menu",True,(0,0,0)),(cx-45,337))
+                pygame.draw.rect(surface,(255,255,255),self.buttons["continue"],2)
+                pygame.draw.rect(surface,(255,255,255),self.buttons["menu"],2)
+
+                surface.blit(self.font.render("Next Level",True,(0,0,0)),(cx-45,293))
+                surface.blit(self.font.render("Main Menu",True,(0,0,0)),(cx-45,338))
