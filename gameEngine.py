@@ -36,6 +36,7 @@ class GameEngine(object):
     def draw(self, drawSurface):
         
         self.chef.draw(drawSurface)
+        pygame.draw.rect(drawSurface, (255,200,0), self.chef.getCollisionRect(), 2)
 
             
     def handleEvent(self, event):        
