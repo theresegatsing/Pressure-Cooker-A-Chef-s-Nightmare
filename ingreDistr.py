@@ -186,3 +186,9 @@ class IngredientDistribution(object):
             surface.blit(text, (x, y))
 
         self.engine.draw(surface)
+
+        if self.engine.flash_timer > 0:            
+            flash = pygame.Surface((RESOLUTION[0], RESOLUTION[1]))
+            flash.fill((255,255,200))
+            flash.set_alpha(40)
+            surface.blit(flash, (0,0))

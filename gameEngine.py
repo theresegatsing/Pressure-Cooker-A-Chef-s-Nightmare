@@ -41,12 +41,7 @@ class GameEngine(object):
         
         self.chef.draw(drawSurface)
 
-        if self.flash_timer > 0:
-            flash = pygame.Surface((RESOLUTION[0], RESOLUTION[1]))
-            flash.fill((255,255,200))
-            flash.set_alpha(40)
-            drawSurface.blit(flash, (0,0))
-
+        
     
     def handleEvent(self, event):        
 
