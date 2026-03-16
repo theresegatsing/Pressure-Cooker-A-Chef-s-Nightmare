@@ -17,7 +17,9 @@ class GameEngine(object):
         center = vec(WORLD_SIZE[0]//2, WORLD_SIZE[1]//2)
         self.chef = Player(center, "chef.png", (0,0))
       #  self.chef = Player((0,0), "chef.png", (0,0))
-        self.chef.animate = True
+      #  self.chef.animate = True
+        self.chef.animate = False
+
        
         self.chefSpeed = 100
 
@@ -44,6 +46,12 @@ class GameEngine(object):
     
     def update(self, seconds):
         self.chef.update(seconds)
+
+        if magnitude(self.chef.velocity) > 0:
+            self.chef.animate = True
+        else:
+            self.chef.animate = False
+            self.chef.frame = 0
 
         curVelocity = self.chef.velocity
 
