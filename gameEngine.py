@@ -22,6 +22,8 @@ class GameEngine(object):
       #  self.chef.animate = True
         self.chef.animate = False
 
+        self.flash_timer = 0
+
        
         self.chefSpeed = 100
 
@@ -54,6 +56,9 @@ class GameEngine(object):
     
     def update(self, seconds):
         self.chef.update(seconds)
+
+        if self.flash_timer > 0:
+            self.flash_timer -= seconds
 
         if magnitude(self.chef.velocity) > 0:
             self.chef.animate = True
@@ -94,7 +99,6 @@ class GameEngine(object):
             if ing["collected"]:
                 continue
             
-            self.flash_timer = 0.15
             pos = ing["pos"]
             image = ing["image"]
 
@@ -107,6 +111,9 @@ class GameEngine(object):
 
             if chefRect.colliderect(ingRect):
                 ing["collected"] = True
+
+                self.flash_timer = 0.15
+
 
                 self.distribution.currentPoints += ing["points"]
                 
