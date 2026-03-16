@@ -2,11 +2,14 @@ from drawable import Drawable
 from animated import Animated
 from vector import vec, magnitude, scale
 from pygame.locals import *
+from constants import *
 
 class Mobile(Animated):
     def __init__(self, position, fileName="", offset=None, maxSpeed=100):
         super().__init__(position, fileName, offset)
-        self.velocity = vec(0,0)
+    #   self.velocity = vec(0,0)
+        self.velocity = vec(WORLD_SIZE[0]//2, WORLD_SIZE[1]//2)
+    
         self.maxSpeed = maxSpeed
     
     def update(self, seconds):
