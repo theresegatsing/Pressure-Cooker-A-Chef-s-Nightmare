@@ -113,7 +113,7 @@ class GameEngine(object):
                 self.distribution.currentPoints += ing["points"]
                 
                 ing["upgrade_level"] += 1
-                ing["points"] /=8
+                ing["points"] /= 6
 
                 # upgrade if possible
                 if ing["upgrade_level"] < 3:
