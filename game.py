@@ -89,7 +89,7 @@ class Game(object):
             self.score = self.state.currentPoints
 
             diff = self.score - self.points
-            self.timeChange = abs(diff) / 60
+            self.timeChange = abs(diff) / 30
 
             if self.score >= self.points:
                 self.result = "success"
