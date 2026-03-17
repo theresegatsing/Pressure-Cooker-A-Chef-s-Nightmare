@@ -107,7 +107,7 @@ class Game(object):
             self.timeTaken = self.timeLimit - self.timeLeft
 
             diff = self.score - self.points
-            self.timeChange = abs(diff) / 60
+            self.timeChange = abs(diff) / 20
 
             if self.score >= self.points:
                 self.result = "success"
