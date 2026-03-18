@@ -18,7 +18,7 @@ class IngredientDistribution(object):
 
         #Drawing the background
 
-        self.tree = Drawable((0,0), "plain.png")
+        self.tree = Drawable((0,0), "bwt.jpg")
         self.tree.image = pygame.transform.scale(
             self.tree.image,
             pyVec(WORLD_SIZE)
