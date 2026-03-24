@@ -23,14 +23,13 @@ TEXT_PADDING = 5
 
 
 class SelectionScreen(object):
-    def __init__(self, level):
+    def __init__(self):
         
         self.background = Drawable((0,0), "Selection Screen background.jpg")
         self.background.image = pygame.transform.smoothscale( self.background.image, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-        self.level = level 
 
-        self.allcards = {1:[
+        self.allCards = [
             Card("burgerCard.png", 
                 2100),
         
@@ -39,10 +38,8 @@ class SelectionScreen(object):
             
             Card("ramenCard.png",
                  2300)]
-        , 
-        2:[]}
+        
 
-        self.allCards = self.allcards[self.level]
         #self.selectedCards = random.sample(self.allCards, 3)
         self.position_cards_centered()
 

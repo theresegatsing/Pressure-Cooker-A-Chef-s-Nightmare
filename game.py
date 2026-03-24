@@ -1,7 +1,6 @@
 import pygame
 from vector import vec
 from ingreDistr import IngredientDistribution
-from selectionScreen import *
 
 SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 350
@@ -31,7 +30,9 @@ class Game(object):
         self.timeChange = 0
 
         self.font = pygame.font.SysFont(None, 22)
+
         self.level = 1
+        self.next_level = False
 
         cx = SCREEN_WIDTH // 2
 
@@ -58,9 +59,8 @@ class Game(object):
 
                     elif self.buttons["continue"].collidepoint(mouse):
                         self.timeLimit -= self.timeChange
-                        self.level += 1
-                        SelectionScreen(self.level).draw(pygame.display.get_surface())
-                        #self.finished = True
+                        self.next_level = True
+                        self.finished = True
 
 
                     elif self.buttons["menu"].collidepoint(mouse):
