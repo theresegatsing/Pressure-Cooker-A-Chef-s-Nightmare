@@ -16,8 +16,8 @@ class Game(object):
 
         self.state = IngredientDistribution(image_path, points)
 
-        self.timeLimit = 30
-        self.timeLeft = 30
+        self.timeLimit = 120
+        self.timeLeft = 120
 
         self.finished = False
         self.replay = False
@@ -33,6 +33,7 @@ class Game(object):
 
         self.level = 1
         self.next_level = False
+        self.next_time_limit = self.timeLimit
 
         cx = SCREEN_WIDTH // 2
 
@@ -58,8 +59,13 @@ class Game(object):
                         self.finished = True
 
                     elif self.buttons["continue"].collidepoint(mouse):
-                        self.timeLimit -= self.timeChange
                         self.next_level = True
+                        
+                        if self.result == "fail":
+                            self.next_time_limit =max(0, self.timeLimit - self.timeChange)
+                        else:
+                            self.next_time_limit = self.timeLimit + self.timeChange
+
                         self.finished = True
 
 

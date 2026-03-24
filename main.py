@@ -40,6 +40,10 @@ def main():
                 if result:
                     image_path, points = result
                     game = Game(image_path, points)
+                    if 'next_time_limit' in locals():
+                        game.timeLimit = next_time_limit
+                        game.timeLeft = next_time_limit
+
                     state = "game"
 
             elif state == "game":
@@ -58,6 +62,8 @@ def main():
                     # Go back to selection screen for the next level
                     next_level = game.level + 1
                     selectionScreen = SelectionScreen(next_level)  # pass level to constructor
+                    next_time_limit = game.next_time_limit
+
                     state = "selection"
                 else:
                     # normal finish → go back to first level selection or menu
