@@ -18,7 +18,7 @@ def main():
     drawSurface = pygame.Surface(pyVec(RESOLUTION))
     clock = pygame.time.Clock()
 
-    selectionScreen = SelectionScreen()
+    selectionScreen = SelectionScreen(1)
     game = None
 
     state = "selection"
@@ -55,18 +55,18 @@ def main():
 
             if game.finished:
                 if getattr(game, 'next_level', False):
-                    # Go to next level
+                    # Go back to selection screen for the next level
                     next_level = game.level + 1
-                    # Here, you can select the next game parameters
-                    image_path, points = LevelCards().get_cards(next_level)
-                    game = Game(image_path, points)
-                    state = "game"
-                else:
-                    game = None
-                    Drawable.CAMERA_OFFSET = vec(0,0)
+                    selectionScreen = SelectionScreen(next_level)  # pass level to constructor
                     state = "selection"
-                    continue
-
+                else:
+                    # normal finish → go back to first level selection or menu
+                    selectionScreen = SelectionScreen(1)  # or keep same level
+                    state = "selection"
+                
+                game = None
+                Drawable.CAMERA_OFFSET = vec(0,0)
+                continue
             game.draw(drawSurface)
 
         pygame.transform.scale(drawSurface, pyVec(UPSCALED), screen)

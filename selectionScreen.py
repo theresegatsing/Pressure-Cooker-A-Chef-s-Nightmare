@@ -9,6 +9,7 @@ from vector import vec
 from game import Game
 from ingreDistr import IngredientDistribution
 from constants import *
+from levelCards import LevelCards
 
 SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 350
@@ -23,22 +24,23 @@ TEXT_PADDING = 5
 
 
 class SelectionScreen(object):
-    def __init__(self):
+    def __init__(self, level):
         
         self.background = Drawable((0,0), "Selection Screen background.jpg")
         self.background.image = pygame.transform.smoothscale( self.background.image, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 
-        self.allCards = [
-            Card("burgerCard.png", 
-                2100),
+      # self.allCards = [
+      #    Card("burgerCard.png", 
+       #        2100),
         
-            Card("hotdogCard.png", 
-                 2000),
+       #    Card("hotdogCard.png", 
+      #          2000),
             
-            Card("ramenCard.png",
-                 2300)]
+       #    Card("ramenCard.png",
+       #         2300)]
         
+        self.allCards = LevelCards().get_level_cards(level)
 
         #self.selectedCards = random.sample(self.allCards, 3)
         self.position_cards_centered()
