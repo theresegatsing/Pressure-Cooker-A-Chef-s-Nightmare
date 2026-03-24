@@ -24,6 +24,8 @@ def main():
     state = "selection"
     RUNNING = True
 
+    next_time_limit = None
+
     while RUNNING:
 
         seconds = clock.tick(60) / 1000
@@ -40,9 +42,11 @@ def main():
                 if result:
                     image_path, points = result
                     game = Game(image_path, points)
-                    if 'next_time_limit' in locals():
+                    if next_time_limit is not None:
+
                         game.timeLimit = next_time_limit
                         game.timeLeft = next_time_limit
+                        next_time_limit = None
 
                     state = "game"
 
