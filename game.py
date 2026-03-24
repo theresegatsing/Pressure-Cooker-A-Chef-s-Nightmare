@@ -1,6 +1,7 @@
 import pygame
 from vector import vec
 from ingreDistr import IngredientDistribution
+from soundManager import SoundManager
 
 SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 350
@@ -35,6 +36,7 @@ class Game(object):
         self.next_level = False
         self.next_time_limit = self.timeLimit
 
+        self.sm = SoundManager.getInstance()
         cx = SCREEN_WIDTH // 2
 
         # Buttons moved higher
@@ -92,8 +94,11 @@ class Game(object):
 
     def update(self, seconds):
 
+
         if self.endScreen:
             return
+
+        self.sm.playBGM("Adventures in Adventureland.mp3")
 
         self.timeLeft -= seconds
 

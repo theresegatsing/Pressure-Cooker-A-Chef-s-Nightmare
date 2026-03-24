@@ -27,7 +27,6 @@ def main():
     RUNNING = True
 
     sm = SoundManager.getInstance() 
-    sm.playBGM("Adventures in Adventureland.mp3")
 
 
 
@@ -67,6 +66,7 @@ def main():
         elif state == "game":
 
             game.update(seconds)
+
 
             if game.finished:
                 if getattr(game, 'next_level', False):
