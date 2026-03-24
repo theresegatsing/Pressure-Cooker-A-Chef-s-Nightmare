@@ -31,7 +31,7 @@ class IngredientDistribution(object):
         self.currentPoints = 0
 
 
-        self.allMeals = ["burger", "hotdog", "ramen"]
+        self.allMeals = ["burger", "hotdog", "ramen", "pizza"]
         self.mealPath = ""
 
         for meal in self.allMeals:
