@@ -8,6 +8,8 @@ from mobile import Mobile, Player
 from gameEngine import GameEngine
 from game import Game
 from levelCards import LevelCards
+from soundManager import SoundManager
+
 
 def main():
 
@@ -23,6 +25,11 @@ def main():
 
     state = "selection"
     RUNNING = True
+
+    sm = SoundManager.getInstance() 
+    sm.playBGM("Adventures in Adventureland.mp3")
+
+
 
     next_time_limit = None
 
