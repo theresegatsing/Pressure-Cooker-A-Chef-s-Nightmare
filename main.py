@@ -58,7 +58,7 @@ def main():
                     # Go to next level
                     next_level = game.level + 1
                     # Here, you can select the next game parameters
-                    image_path, points = LevelCards.get_cards(next_level)
+                    image_path, points = LevelCards().get_cards(next_level)
                     game = Game(image_path, points)
                     state = "game"
                 else:
