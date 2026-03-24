@@ -62,9 +62,9 @@ class Game(object):
                         self.next_level = True
                         
                         if self.result == "fail":
-                            self.next_time_limit =max(0, self.timeLimit - self.timeChange)
+                            self.next_time_limit =max(0, self.timeLimit - self.timeChange -10)
                         else:
-                            self.next_time_limit = self.timeLimit + self.timeChange
+                            self.next_time_limit = self.timeLimit + self.timeChange - 10
 
                         self.finished = True
 
@@ -78,9 +78,9 @@ class Game(object):
                         self.next_level = True
 
                         if self.result == "fail":
-                            self.next_time_limit =max(0, self.timeLimit - self.timeChange)
+                            self.next_time_limit =max(0, self.timeLimit - self.timeChange-10)
                         else:
-                            self.next_time_limit = self.timeLimit + self.timeChange
+                            self.next_time_limit = self.timeLimit + self.timeChange - 10
                         self.finished = True
 
                     elif self.buttons["menu"].collidepoint(mouse):
