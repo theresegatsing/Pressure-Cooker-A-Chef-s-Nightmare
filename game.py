@@ -70,6 +70,7 @@ class Game(object):
 
                     if self.buttons["continue"].collidepoint(mouse):
                         self.timeLimit += self.timeChange
+                        self.next_level = True
                         self.finished = True
 
                     elif self.buttons["menu"].collidepoint(mouse):
