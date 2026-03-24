@@ -9,7 +9,6 @@ from vector import vec, pyVec
 from constants import *
 from drawable import Drawable
 from gameEngine import GameEngine
-from soundManager import SoundManager
 
 PATH = "game sprites"
 
@@ -53,8 +52,6 @@ class IngredientDistribution(object):
 
         self.font = pygame.font.SysFont(None, 18)
 
-     #  self.sm = SoundManager.getInstance()
-     #  self.sm.playBGM("Adventures in Adventureland.mp3")
 
 
 

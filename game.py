@@ -1,7 +1,6 @@
 import pygame
 from vector import vec
 from ingreDistr import IngredientDistribution
-from soundManager import SoundManager
 
 SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 350
