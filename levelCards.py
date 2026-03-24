@@ -3,13 +3,12 @@ from card import Card
 
 class LevelCards(object):
 
-    def __init__(self, level):
+    def __init__(self):
 
-        self.level = level
 
         self.levelCards = {2: [Card("burgerCard.png", 
                 2100)
         ]}
     
-    def get_cards(self):
-        return self.levelCards[self.level]
+    def get_cards(self, level):
+        return self.levelCards[level]
