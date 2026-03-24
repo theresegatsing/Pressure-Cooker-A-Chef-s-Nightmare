@@ -9,6 +9,7 @@ from vector import vec, pyVec
 from constants import *
 from drawable import Drawable
 from gameEngine import GameEngine
+from soundManager import SoundManager
 
 PATH = "game sprites"
 
@@ -51,6 +52,11 @@ class IngredientDistribution(object):
         self.engine = GameEngine(self.ingredients, self)
 
         self.font = pygame.font.SysFont(None, 18)
+
+        self.sm = SoundManager.getInstance()
+        self.sm.playBGM("Adventures in Adventureland.mp3")
+
+
 
 
     def make_grey(self, image):
@@ -125,6 +131,7 @@ class IngredientDistribution(object):
     def draw(self, surface):
 
         self.tree.draw(surface)
+
 
         for ing in self.ingredients:
             if not ing["collected"]:
