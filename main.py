@@ -17,7 +17,7 @@ def main():
     drawSurface = pygame.Surface(pyVec(RESOLUTION))
     clock = pygame.time.Clock()
 
-    selectionScreen = SelectionScreen()
+    selectionScreen = SelectionScreen(1)
     game = None
 
     state = "selection"

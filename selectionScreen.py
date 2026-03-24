@@ -23,12 +23,14 @@ TEXT_PADDING = 5
 
 
 class SelectionScreen(object):
-    def __init__(self):
+    def __init__(self, level):
         
         self.background = Drawable((0,0), "Selection Screen background.jpg")
         self.background.image = pygame.transform.smoothscale( self.background.image, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-        self.allCards = [
+        self.level = level 
+
+        self.allcards = {1:[
             Card("burgerCard.png", 
                 2100),
         
@@ -36,16 +38,19 @@ class SelectionScreen(object):
                  2000),
             
             Card("ramenCard.png",
-                 2300)
-        ]
+                 2300)]
+        , 
+        2:[]}
 
-        self.selectedCards = random.sample(self.allCards, 3)
+        self.allCards = self.allcards[self.level]
+        #self.selectedCards = random.sample(self.allCards, 3)
         self.position_cards_centered()
 
     
     def position_cards_centered(self):
         available_width = SCREEN_WIDTH - 2 * SIDE_MARGIN
-        num_cards = len(self.selectedCards)
+        #num_cards = len(self.selectedCards)
+        num_cards = len(self.allCards)
 
         if num_cards > 1:
             card_gap = (available_width - num_cards * CARD_WIDTH) // (num_cards - 1)
@@ -55,7 +60,8 @@ class SelectionScreen(object):
         start_x = SIDE_MARGIN
         y = 80
 
-        for i, card in enumerate(self.selectedCards):
+        #for i, card in enumerate(self.selectedCards):
+        for i, card in enumerate(self.allCards):
             x = start_x + i * (CARD_WIDTH + card_gap)
             card.drawable.position = vec(x, y)
 
@@ -64,7 +70,8 @@ class SelectionScreen(object):
       # surface.fill((0, 0, 0))
         self.background.draw(surface)
 
-        for card in self.selectedCards:
+        #for card in self.selectedCards:
+        for card in self.allCards:
             card.drawable.draw(surface)
 
     
@@ -74,7 +81,8 @@ class SelectionScreen(object):
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = vec(*event.pos) // SCALE
 
-            for card in self.selectedCards:
+           # for card in self.selectedCards:
+            for card in self.allCards:
                 if card.drawable.getCollisionRect().collidepoint(mouse_pos):
                     return (card.image_path, card.points)
         

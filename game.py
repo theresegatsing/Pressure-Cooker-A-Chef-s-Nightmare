@@ -31,6 +31,7 @@ class Game(object):
         self.timeChange = 0
 
         self.font = pygame.font.SysFont(None, 22)
+        self.level = 1
 
         cx = SCREEN_WIDTH // 2
 
@@ -57,7 +58,10 @@ class Game(object):
 
                     elif self.buttons["continue"].collidepoint(mouse):
                         self.timeLimit -= self.timeChange
-                        self.finished = True
+                        self.level += 1
+                        SelectionScreen(self.level).draw(pygame.display.get_surface())
+                        #self.finished = True
+
 
                     elif self.buttons["menu"].collidepoint(mouse):
                         self.finished = True
