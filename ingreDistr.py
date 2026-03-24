@@ -151,9 +151,9 @@ class IngredientDistribution(object):
             for i in range(3):
 
                 if i < level:
-                    color = (255,255,255)   # filled dot
+                    color = (0,255,0)  # filled dot
                 else:
-                    color = (80,80,80)      # empty dot
+                    color = (255,0,0)   # empty dot
 
                 pygame.draw.circle(
                     surface,
