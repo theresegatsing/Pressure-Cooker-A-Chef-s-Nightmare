@@ -26,7 +26,9 @@ def main():
     state = "selection"
     RUNNING = True
 
-    sm = SoundManager.getInstance() 
+    pygame.mixer.init() 
+
+    sm = SoundManager.getInstance()
 
 
 
@@ -54,6 +56,9 @@ def main():
                         game.timeLeft = next_time_limit
                         next_time_limit = None
 
+                    
+                    sm.playBGM("Adventures in Adventureland.mp3")
+
                     state = "game"
 
             elif state == "game":
@@ -66,9 +71,11 @@ def main():
         elif state == "game":
 
             game.update(seconds)
-
-
+            
             if game.finished:
+                
+                pygame.mixer.music.stop()
+
                 if getattr(game, 'next_level', False):
                     # Go back to selection screen for the next level
                     next_level = game.level + 1

@@ -53,8 +53,8 @@ class IngredientDistribution(object):
 
         self.font = pygame.font.SysFont(None, 18)
 
-        self.sm = SoundManager.getInstance()
-        self.sm.playBGM("Adventures in Adventureland.mp3")
+     #  self.sm = SoundManager.getInstance()
+     #  self.sm.playBGM("Adventures in Adventureland.mp3")
 
 
 
