@@ -46,10 +46,10 @@ class SpriteManager(object):
     }
     
     # A list of images that require to be loaded with transparency
-    _TRANSPARENCY = [""]
+    _TRANSPARENCY = ["orb.png"]
     
     # A list of images that require to be loaded with a color key
-    _COLOR_KEY = ["chef.png", "t2.png"]
+    _COLOR_KEY = ["chef.png", "t2.png", "orb.png"]
     
     def __init__(self):
         """Creation of the SpriteManager, sets up storage for surface.
