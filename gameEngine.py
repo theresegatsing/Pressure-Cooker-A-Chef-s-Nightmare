@@ -8,6 +8,7 @@ from os.path import join
 from vector import scale, vec, pyVec, magnitude
 from animated import Animated
 from constants import *
+from orb import Orbs
 import random 
  
 
@@ -35,22 +36,27 @@ class GameEngine(object):
 
         self.nearest_distance = None
 
+        self.orbs = Orbs()
+
        
 
     def draw(self, drawSurface):
         
         self.chef.draw(drawSurface)
+        self.orbs.draw(drawSurface)
 
         
     
     def handleEvent(self, event):        
 
-        self.chef.handleEvent(event)        
+        self.chef.handleEvent(event)     
+        self.orbs.handleEvent(event)   
 
     
     
     def update(self, seconds):
         self.chef.update(seconds)
+        self.orbs.update(seconds, self.chef)
 
         if self.flash_timer > 0:
             self.flash_timer -= seconds

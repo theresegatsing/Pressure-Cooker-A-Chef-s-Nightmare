@@ -5,7 +5,6 @@ from mobile import Mobile, Player
 from vector import vec, pyVec
 import random 
 from constants import *
-from gameEngine import GameEngine
 
 
 
