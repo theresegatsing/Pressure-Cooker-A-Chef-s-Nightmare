@@ -45,7 +45,11 @@ class Orbs(object):
         position[0] = max(0, min(position[0], WORLD_SIZE[0] - 50))
         position[1] = max(0, min(position[1], WORLD_SIZE[1] - 50))
 
-        self.orbs.append(Drawable(position, "orb.png"))  # ✅ no offset
+
+        orb = Drawable(position, "orb.png")
+        orb.image = pygame.transform.scale(orb.image, (20, 38 ))
+
+        self.orbs.append(orb)  
         self.positions.append(position)
         self.velocities.append(vec(0, 0))
 

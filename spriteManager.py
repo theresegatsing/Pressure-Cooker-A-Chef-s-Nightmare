@@ -34,7 +34,7 @@ class SpriteManager(object):
     
     # Static information about the sprite sizes of particular image sheets.
     _SPRITE_SIZES = {
-        "chef.png": vec(18,35)
+        "chef.png": vec(18,35),
     }
     
     # A default sprite size
@@ -46,7 +46,7 @@ class SpriteManager(object):
     }
     
     # A list of images that require to be loaded with transparency
-    _TRANSPARENCY = ["orb.png"]
+    _TRANSPARENCY = []
     
     # A list of images that require to be loaded with a color key
     _COLOR_KEY = ["chef.png", "t2.png", "orb.png"]
