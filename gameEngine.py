@@ -24,7 +24,7 @@ class GameEngine(object):
         self.chef.animate = False
 
         self.flash_timer = 0
-
+        self.collected_stack = []  # keeps order of collected ingredients
        
         self.chefSpeed = 100
 
@@ -56,7 +56,25 @@ class GameEngine(object):
     def update(self, seconds):
         self.chef.update(seconds)
         self.orbs.update(seconds, self.chef)
+        # 🔥 goblin penalty
+        for orb in self.orbs.orbs:
+            if self.chef.getCollisionRect().colliderect(orb.getCollisionRect()):
 
+                if self.collected_stack:
+                    last_ing = self.collected_stack.pop()
+
+                    # 🔥 remove one upgrade level (dot)
+                    if last_ing["upgrade_level"] > 0:
+                        last_ing["upgrade_level"] -= 1
+
+                        # 🔥 subtract points
+                        self.distribution.currentPoints -= last_ing["points"]
+
+                        if self.distribution.currentPoints < 0:
+                            self.distribution.currentPoints = 0
+
+                self.flash_timer = 0.2
+                
         if self.flash_timer > 0:
             self.flash_timer -= seconds
 
@@ -111,6 +129,10 @@ class GameEngine(object):
 
             if chefRect.colliderect(ingRect):
                 ing["collected"] = True
+
+                self.collected_stack.append(ing)  # 🔥 track order
+
+
 
                 self.flash_timer = 0.15
 

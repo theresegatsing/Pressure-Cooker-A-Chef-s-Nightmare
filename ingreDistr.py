@@ -111,7 +111,9 @@ class IngredientDistribution(object):
                 "image": image,
                 "grey": grey,
                 "pos": vec(x, y),
+
                 "collected": False,
+
                 "upgrade_level" : 0,
                 "points": 0
             })
