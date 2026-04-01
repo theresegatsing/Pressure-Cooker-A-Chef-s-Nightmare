@@ -196,3 +196,10 @@ class IngredientDistribution(object):
             flash.fill((255,255,200))
             flash.set_alpha(100)
             surface.blit(flash, (0,0))
+        
+        # red damage flash (goblin hit)
+        if self.engine.damage_flash_timer > 0:
+            flash = pygame.Surface((RESOLUTION[0], RESOLUTION[1]))
+            flash.fill((255, 0, 0))  # RED
+            flash.set_alpha(120)
+            surface.blit(flash, (0,0))

@@ -23,6 +23,7 @@ class GameEngine(object):
         self.chef.animate = False
 
         self.flash_timer = 0
+        self.damage_flash_timer = 0
         self.collected_stack = []  # keeps order of collected ingredients
        
         self.chefSpeed = 100
@@ -86,7 +87,7 @@ class GameEngine(object):
                             if self.distribution.currentPoints < 0:
                                 self.distribution.currentPoints = 0
 
-                    self.flash_timer = 0.2
+                    self.damage_flash_timer = 0.25
                     self.goblin_hit_cooldown = 1.0
 
                     orbs_to_remove.append(i)
@@ -96,6 +97,9 @@ class GameEngine(object):
       
         if self.flash_timer > 0:
             self.flash_timer -= seconds
+        
+        if self.damage_flash_timer > 0:
+            self.damage_flash_timer -= seconds
 
         if magnitude(self.chef.velocity) > 0:
             self.chef.animate = True
