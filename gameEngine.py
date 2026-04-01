@@ -37,6 +37,7 @@ class GameEngine(object):
         self.nearest_distance = None
 
         self.orbs = Orbs()
+        self.goblin_hit_cooldown = 0
 
        
 
@@ -56,25 +57,36 @@ class GameEngine(object):
     def update(self, seconds):
         self.chef.update(seconds)
         self.orbs.update(seconds, self.chef)
+
+        if self.goblin_hit_cooldown > 0:
+            self.goblin_hit_cooldown -= seconds
+
         # 🔥 goblin penalty
         for orb in self.orbs.orbs:
             if self.chef.getCollisionRect().colliderect(orb.getCollisionRect()):
 
-                if self.collected_stack:
-                    last_ing = self.collected_stack.pop()
+                if self.goblin_hit_cooldown <= 0:
 
-                    # 🔥 remove one upgrade level (dot)
-                    if last_ing["upgrade_level"] > 0:
-                        last_ing["upgrade_level"] -= 1
+                    if self.collected_stack:
+                        last_ing = self.collected_stack.pop()
 
-                        # 🔥 subtract points
-                        self.distribution.currentPoints -= last_ing["points"]
+                        # 🔥 remove one upgrade level (dot)
+                        if last_ing["upgrade_level"] > 0:
+                            last_ing["upgrade_level"] -= 1
 
-                        if self.distribution.currentPoints < 0:
-                            self.distribution.currentPoints = 0
+                            # 🔥 subtract points
+                            self.distribution.currentPoints -= last_ing["base_points"]
+                            print("Score after hit:", self.distribution.currentPoints)
+
+                            if self.distribution.currentPoints < 0:
+                                self.distribution.currentPoints = 0
+                            
+                            break
 
                 self.flash_timer = 0.2
-                
+                self.goblin_hit_cooldown = 1.0  # 🔥 1 second delay
+
+
         if self.flash_timer > 0:
             self.flash_timer -= seconds
 

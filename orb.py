@@ -99,7 +99,7 @@ class Orbs(object):
             ):
                 deadOrbs.append(i)
 
-        for index in sorted(deadOrbs, reverse=True):
-            del self.orbs[index]
-            del self.velocities[index]
-            del self.positions[index]
+        #for index in sorted(deadOrbs, reverse=True):
+        #    del self.orbs[index]
+        #    del self.velocities[index]
+        #    del self.positions[index]
