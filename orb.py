@@ -16,7 +16,7 @@ class Orbs(object):
         self.spawn_timer = 0
         self.spawn_interval = 15
 
-        self.max_speed = 400
+        self.max_speed = 120
         self.acceleration = 50   
 
 
@@ -79,7 +79,10 @@ class Orbs(object):
             if dist != 0:
                 direction = direction / dist  # normalize
 
-            self.velocities[i] += direction * self.acceleration * seconds
+            desired_velocity = direction * self.max_speed
+
+            # smooth steering
+            self.velocities[i] += (desired_velocity - self.velocities[i]) * 0.1
 
             #  prevents speed from getting too fast
             if magnitude(self.velocities[i]) > self.max_speed:
