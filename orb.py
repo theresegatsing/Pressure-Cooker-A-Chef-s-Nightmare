@@ -16,8 +16,8 @@ class Orbs(object):
         self.spawn_timer = 0
         self.spawn_interval = 15
 
-        self.max_speed = 80        
-        self.acceleration = 60     
+        self.max_speed = 400
+        self.acceleration = 50   
 
 
         
@@ -30,7 +30,7 @@ class Orbs(object):
 
         chef_pos = chef.getPosition()
 
-        radius = 200
+        radius = 100
 
         angle = random.uniform(0, 2 * 3.14159)
 
@@ -91,4 +91,18 @@ class Orbs(object):
             self.positions[i] += self.velocities[i] * seconds
             self.orbs[i].position = self.positions[i]
 
-           
+
+            if self.positions[i][0] <= 0:
+                self.velocities[i][0] = - self.velocities[i][0]
+                self.positions[i][0] = 0
+            
+            elif self.positions[i][0] + self.orbs[i].getWidth() > WORLD_SIZE[0]:
+                self.positions[i][0] = WORLD_SIZE[0] - self.orbs[i].getWidth() 
+                self.velocities[i][0]= - self.velocities[i][0]
+            
+            if self.positions[i][1] <= 0:
+                self.velocities[i][1] = - self.velocities[i][1]
+                self.positions[i][1] = 0
+            elif self.positions[i][1] + self.orbs[i].getHeight() > WORLD_SIZE[1]:
+                self.positions[i][1] = WORLD_SIZE[1] - self.orbs[i].getHeight()
+                self.velocities[i][1]= - self.velocities[i][1]
