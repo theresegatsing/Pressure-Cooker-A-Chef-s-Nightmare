@@ -16,8 +16,8 @@ class Orbs(object):
         self.spawn_timer = 0
         self.spawn_interval = 15
 
-        self.max_speed = 80        # 🔥 slower top speed
-        self.acceleration = 60     # 🔥 smooth turning
+        self.max_speed = 80        
+        self.acceleration = 60     
 
 
         
@@ -62,7 +62,6 @@ class Orbs(object):
             self.spawn_orb(chef)
             self.spawn_timer -= self.spawn_interval
 
-        deadOrbs = []
 
         chef_center = chef.getPosition() + chef.getSize() / 2
 
@@ -80,10 +79,9 @@ class Orbs(object):
             if dist != 0:
                 direction = direction / dist  # normalize
 
-            # 🔥 smooth acceleration toward chef
             self.velocities[i] += direction * self.acceleration * seconds
 
-            # 🔥 clamp speed (prevents it from getting too fast)
+            #  prevents speed from getting too fast
             if magnitude(self.velocities[i]) > self.max_speed:
                 self.velocities[i] = (
                     self.velocities[i] / magnitude(self.velocities[i])
@@ -93,13 +91,4 @@ class Orbs(object):
             self.positions[i] += self.velocities[i] * seconds
             self.orbs[i].position = self.positions[i]
 
-            # collision
-            if chef.getCollisionRect().colliderect(
-                self.orbs[i].getCollisionRect()
-            ):
-                deadOrbs.append(i)
-
-        #for index in sorted(deadOrbs, reverse=True):
-        #    del self.orbs[index]
-        #    del self.velocities[index]
-        #    del self.positions[index]
+           

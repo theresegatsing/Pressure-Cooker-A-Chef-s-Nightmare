@@ -19,8 +19,7 @@ class GameEngine(object):
 
         center = vec(WORLD_SIZE[0]//2, WORLD_SIZE[1]//2)
         self.chef = Player(center, "chef.png", (0,0))
-      #  self.chef = Player((0,0), "chef.png", (0,0))
-      #  self.chef.animate = True
+
         self.chef.animate = False
 
         self.flash_timer = 0
@@ -62,12 +61,12 @@ class GameEngine(object):
             self.goblin_hit_cooldown -= seconds
         orbs_to_remove = []
 
-        hit_occurred = False  # 🔥 add this
+        hit_occurred = False  
 
         for i, orb in enumerate(self.orbs.orbs):
 
             if hit_occurred:
-                break  # 🔥 STOP after first hit
+                break 
 
             if self.chef.getCollisionRect().colliderect(orb.getCollisionRect()):
 
@@ -86,20 +85,15 @@ class GameEngine(object):
 
                             if self.distribution.currentPoints < 0:
                                 self.distribution.currentPoints = 0
-                            print("Score after hit:", self.distribution.currentPoints)
 
                     self.flash_timer = 0.2
                     self.goblin_hit_cooldown = 1.0
 
                     orbs_to_remove.append(i)
 
-                    hit_occurred = True  # 🔥 prevent more hits this frame
+                    hit_occurred = True  
 
-        for i in sorted(orbs_to_remove, reverse=True):
-            del self.orbs.orbs[i]
-            del self.orbs.positions[i]
-            del self.orbs.velocities[i]
-
+      
         if self.flash_timer > 0:
             self.flash_timer -= seconds
 
@@ -116,8 +110,7 @@ class GameEngine(object):
 
         
             self.nearest_distance = self.nearestIngredientDistance()
-            #if dist != None:
-            #    print(f"Nearest ingredient: {feet} feet away")
+
         
         self.prev_velocity = vec(curVelocity[0], curVelocity[1])
 
@@ -157,7 +150,7 @@ class GameEngine(object):
 
                 self.collected_stack.append({
                     "ingredient": ing,
-                    "points": ing["points"]   # 🔥 store exact value gained
+                    "points": ing["points"]   
                 })
 
 

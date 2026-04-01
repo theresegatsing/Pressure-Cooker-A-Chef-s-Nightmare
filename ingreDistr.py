@@ -47,7 +47,6 @@ class IngredientDistribution(object):
 
         for ing in self.ingredients:
             ing["points"] = self.pointsPerIngredient
-            ing["base_points"] = self.pointsPerIngredient  # 🔥 ADD THIS
 
         self.engine = GameEngine(self.ingredients, self)
 
@@ -112,12 +111,9 @@ class IngredientDistribution(object):
                 "image": image,
                 "grey": grey,
                 "pos": vec(x, y),
-
                 "collected": False,
-
                 "upgrade_level" : 0,
                 "points": 0,
-                "base_points": 0
             })
 
     
