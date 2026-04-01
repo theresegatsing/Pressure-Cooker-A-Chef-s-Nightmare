@@ -81,7 +81,6 @@ class Orbs(object):
 
             desired_velocity = direction * self.max_speed
 
-            # smooth steering
             self.velocities[i] += (desired_velocity - self.velocities[i]) * 0.1
 
             #  prevents speed from getting too fast
