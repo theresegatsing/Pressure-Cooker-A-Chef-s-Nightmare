@@ -60,32 +60,45 @@ class GameEngine(object):
 
         if self.goblin_hit_cooldown > 0:
             self.goblin_hit_cooldown -= seconds
+        orbs_to_remove = []
 
-        # 🔥 goblin penalty
-        for orb in self.orbs.orbs:
+        hit_occurred = False  # 🔥 add this
+
+        for i, orb in enumerate(self.orbs.orbs):
+
+            if hit_occurred:
+                break  # 🔥 STOP after first hit
+
             if self.chef.getCollisionRect().colliderect(orb.getCollisionRect()):
 
                 if self.goblin_hit_cooldown <= 0:
 
                     if self.collected_stack:
-                        last_ing = self.collected_stack.pop()
+                        entry = self.collected_stack.pop()
+                        ing = entry["ingredient"]
+                        points_to_remove = entry["points"]
 
-                        # 🔥 remove one upgrade level (dot)
-                        if last_ing["upgrade_level"] > 0:
-                            last_ing["upgrade_level"] -= 1
+                        if ing["upgrade_level"] > 0:
 
-                            # 🔥 subtract points
-                            self.distribution.currentPoints -= last_ing["base_points"]
-                            print("Score after hit:", self.distribution.currentPoints)
+                            ing["upgrade_level"] -= 1
+
+                            self.distribution.currentPoints -= points_to_remove
 
                             if self.distribution.currentPoints < 0:
                                 self.distribution.currentPoints = 0
-                            
-                            break
+                            print("Score after hit:", self.distribution.currentPoints)
 
-                self.flash_timer = 0.2
-                self.goblin_hit_cooldown = 1.0  # 🔥 1 second delay
+                    self.flash_timer = 0.2
+                    self.goblin_hit_cooldown = 1.0
 
+                    orbs_to_remove.append(i)
+
+                    hit_occurred = True  # 🔥 prevent more hits this frame
+
+        for i in sorted(orbs_to_remove, reverse=True):
+            del self.orbs.orbs[i]
+            del self.orbs.positions[i]
+            del self.orbs.velocities[i]
 
         if self.flash_timer > 0:
             self.flash_timer -= seconds
@@ -142,7 +155,10 @@ class GameEngine(object):
             if chefRect.colliderect(ingRect):
                 ing["collected"] = True
 
-                self.collected_stack.append(ing)  # 🔥 track order
+                self.collected_stack.append({
+                    "ingredient": ing,
+                    "points": ing["points"]   # 🔥 store exact value gained
+                })
 
 
 
