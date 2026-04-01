@@ -47,7 +47,7 @@ class Orbs(object):
 
 
         orb = Drawable(position, "orb.png")
-        orb.image = pygame.transform.scale(orb.image, (20, 38 ))
+        orb.image = pygame.transform.scale(orb.image, (32, 32))
 
         self.orbs.append(orb)  
         self.positions.append(position)
