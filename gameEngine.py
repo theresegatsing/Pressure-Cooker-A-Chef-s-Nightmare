@@ -39,18 +39,40 @@ class GameEngine(object):
         self.orbs = Orbs()
         self.goblin_hit_cooldown = 0
 
+        
+        self.gadget_charges = 0
+        self.max_charges = 3
+
+        self.gadget_active = False
+        self.gadget_timer = 0
+        self.gadget_duration = 7
+
+        self.gadget_unlock_stage = 0  # 0 → none, 1 → 1/3, 2 → 2/3, 3 → full
+
        
 
     def draw(self, drawSurface):
         
         self.chef.draw(drawSurface)
         self.orbs.draw(drawSurface)
+        if self.gadget_active:
+            glow = pygame.Surface(self.chef.getSize(), pygame.SRCALPHA)
+            glow.fill((100, 100, 255, 80))
+            drawSurface.blit(glow, pyVec(self.chef.getPosition() - Drawable.CAMERA_OFFSET))
 
         
     
     def handleEvent(self, event):        
 
         self.chef.handleEvent(event)     
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:  # press SPACE to activate
+
+                if self.gadget_charges > 0 and not self.gadget_active:
+                    self.gadget_active = True
+                    self.gadget_timer = self.gadget_duration
+                    self.gadget_charges -= 1
 
     
     
@@ -71,7 +93,7 @@ class GameEngine(object):
 
             if self.chef.getCollisionRect().colliderect(orb.getCollisionRect()):
 
-                if self.goblin_hit_cooldown <= 0:
+                if self.goblin_hit_cooldown <= 0 and not self.gadget_active:
 
                     if self.collected_stack:
                         entry = self.collected_stack.pop()
@@ -184,6 +206,33 @@ class GameEngine(object):
                     ing["collected"] = False
 
 
+
+        score = self.distribution.currentPoints
+        threshold = self.distribution.thresholdPoints
+
+        ratio = score / threshold
+
+        new_stage = 0
+        if ratio >= 1:
+            new_stage = 3
+        elif ratio >= 2/3:
+            new_stage = 2
+        elif ratio >= 1/3:
+            new_stage = 1
+
+        # unlock new charges
+        if new_stage > self.gadget_unlock_stage:
+            gained = new_stage - self.gadget_unlock_stage
+            self.gadget_charges = min(self.gadget_charges + gained, self.max_charges)
+            self.gadget_unlock_stage = new_stage
+
+
+        if self.gadget_active:
+            self.gadget_timer -= seconds
+
+            if self.gadget_timer <= 0:
+                self.gadget_active = False
+                
         Drawable.CAMERA_OFFSET = self.chef.getPosition() + self.chef.getSize() /2 -  RESOLUTION /2
 
         for i in range (2):

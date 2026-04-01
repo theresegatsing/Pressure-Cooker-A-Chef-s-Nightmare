@@ -52,6 +52,9 @@ class IngredientDistribution(object):
 
         self.font = pygame.font.SysFont(None, 18)
 
+        self.spatula_img = pygame.image.load("images/spatula.png").convert_alpha()
+        self.spatula_img = pygame.transform.scale(self.spatula_img, (30, 30))
+
 
 
 
@@ -203,3 +206,20 @@ class IngredientDistribution(object):
             flash.fill((255, 0, 0))  # RED
             flash.set_alpha(120)
             surface.blit(flash, (0,0))
+
+
+        for i in range(self.engine.gadget_charges):
+            x = 10 + i * 40
+            y = 50
+
+            surface.blit(self.spatula_img, (x, y))
+        
+        if self.engine.gadget_active:
+
+            timer_text = self.font.render(
+                f"{round(self.engine.gadget_timer,1)}s",
+                True,
+                (0, 0, 255)
+            )
+
+            surface.blit(timer_text, (10, 80))
