@@ -131,10 +131,7 @@ class GameEngine(object):
 
         curVelocity = self.chef.velocity
 
-        #detect turning
-        if curVelocity[0] != self.prev_velocity[0] or curVelocity[1] != self.prev_velocity[1]:
-
-        
+        if magnitude(self.chef.velocity) > 0:
             self.nearest_distance = self.nearestIngredientDistance()
 
         
