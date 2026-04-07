@@ -9,7 +9,7 @@ SCALE = 2
 
 class Game(object):
 
-    def __init__(self, image_path, points):
+    def __init__(self, image_path, points, level):
 
         self.image_path = image_path
         self.points = points
@@ -31,7 +31,7 @@ class Game(object):
 
         self.font = pygame.font.SysFont(None, 22)
 
-        self.level = 1
+        self.level = level
         self.next_level = False
         self.next_time_limit = self.timeLimit
 
@@ -59,7 +59,7 @@ class Game(object):
                         self.finished = True
 
                     elif self.buttons["continue"].collidepoint(mouse):
-                        self.level += 1
+                        #self.level += 1
                         self.next_level = True
                         
                         if self.result == "fail":
@@ -77,7 +77,7 @@ class Game(object):
 
                     if self.buttons["continue"].collidepoint(mouse):
                         self.next_level = True
-                        self.level += 1
+                     #   self.level += 1
 
                         if self.result == "fail":
                             self.next_time_limit =max(0, self.timeLimit - self.timeChange-10)

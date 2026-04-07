@@ -29,11 +29,10 @@ class SelectionScreen(object):
         self.background = Drawable((0,0), "Selection Screen background.jpg")
         self.background.image = pygame.transform.smoothscale( self.background.image, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-        
-        self.allCards = LevelCards().get_level_cards(level)
+        self.level = level
+        self.allCards = LevelCards().get_level_cards(self.level)
 
-        #self.selectedCards = random.sample(self.allCards, 3)
-        self.selectedCards = self.allCards
+        self.selectedCards = random.sample(self.allCards, 3)
         self.position_cards_centered()
 
     

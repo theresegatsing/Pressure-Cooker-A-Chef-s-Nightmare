@@ -49,7 +49,7 @@ def main():
 
                 if result:
                     image_path, points = result
-                    game = Game(image_path, points)
+                    game = Game(image_path, points, selectionScreen.level)
                     if next_time_limit is not None:
 
                         game.timeLimit = next_time_limit
@@ -79,14 +79,20 @@ def main():
                 if getattr(game, 'next_level', False):
                     # Go back to selection screen for the next level
                     print("CURRENT LEVEL:", game.level)
-                    next_level = game.level 
+                    
+                   
+                    next_level = game.level + 1
+
+                    if next_level > 3:
+                        next_level = 1
+
                     selectionScreen = SelectionScreen(next_level)  # pass level to constructor
                     next_time_limit = game.next_time_limit
 
                     state = "selection"
                 else:
                     # normal finish → go back to first level selection or menu
-                    selectionScreen = SelectionScreen(1)  # or keep same level
+                    selectionScreen = SelectionScreen(game.level)  # or keep same level
                     state = "selection"
                 
                 game = None
