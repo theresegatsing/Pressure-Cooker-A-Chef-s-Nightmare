@@ -16,7 +16,7 @@ class Orbs(object):
         self.spawn_timer = 0
         self.spawn_interval = 15
 
-        self.max_speed = 90
+        self.max_speed = 110
         self.acceleration = 50   
 
 
