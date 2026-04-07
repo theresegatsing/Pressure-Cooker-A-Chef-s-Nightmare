@@ -59,6 +59,7 @@ class Game(object):
                         self.finished = True
 
                     elif self.buttons["continue"].collidepoint(mouse):
+                        self.level += 1
                         self.next_level = True
                         
                         if self.result == "fail":
@@ -76,6 +77,7 @@ class Game(object):
 
                     if self.buttons["continue"].collidepoint(mouse):
                         self.next_level = True
+                        self.level += 1
 
                         if self.result == "fail":
                             self.next_time_limit =max(0, self.timeLimit - self.timeChange-10)

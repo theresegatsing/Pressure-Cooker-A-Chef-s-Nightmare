@@ -79,7 +79,7 @@ def main():
                 if getattr(game, 'next_level', False):
                     # Go back to selection screen for the next level
                     print("CURRENT LEVEL:", game.level)
-                    next_level = game.level + 1
+                    next_level = game.level 
                     selectionScreen = SelectionScreen(next_level)  # pass level to constructor
                     next_time_limit = game.next_time_limit
 
