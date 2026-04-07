@@ -32,7 +32,8 @@ class SelectionScreen(object):
         
         self.allCards = LevelCards().get_level_cards(level)
 
-        self.selectedCards = random.sample(self.allCards, 3)
+        #self.selectedCards = random.sample(self.allCards, 3)
+        self.selectedCards = self.allCards
         self.position_cards_centered()
 
     
