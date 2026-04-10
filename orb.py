@@ -25,7 +25,7 @@ class Orbs(object):
         for orb in self.orbs:
             orb.draw(screen)
         
-
+    # spawns an orb at a random position around the chef
     def spawn_orb(self, chef):
 
         chef_pos = chef.getPosition()
@@ -58,6 +58,7 @@ class Orbs(object):
 
         self.spawn_timer += seconds
 
+        # spawn new orbs at intervals
         if self.spawn_timer >= self.spawn_interval:
             self.spawn_orb(chef)
             self.spawn_timer -= self.spawn_interval
