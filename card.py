@@ -9,6 +9,7 @@ TEXT_PADDING = 5
 
 class Card(object):
 
+    # Initialize the card with an image and points
     def __init__(self, image_path, points):
         self.drawable = Drawable((0, 0), image_path)
         self.drawable.image = pygame.transform.smoothscale(
