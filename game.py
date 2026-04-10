@@ -37,7 +37,6 @@ class Game(object):
 
         cx = SCREEN_WIDTH // 2
 
-        # Buttons moved higher
         self.buttons = {
             "replay": pygame.Rect(cx-80, 170, 160, 30),
             "continue": pygame.Rect(cx-80, 205, 160, 30),
@@ -59,7 +58,6 @@ class Game(object):
                         self.finished = True
 
                     elif self.buttons["continue"].collidepoint(mouse):
-                        #self.level += 1
                         self.next_level = True
                         
                         if self.result == "fail":
@@ -77,7 +75,6 @@ class Game(object):
 
                     if self.buttons["continue"].collidepoint(mouse):
                         self.next_level = True
-                     #   self.level += 1
 
                         if self.result == "fail":
                             self.next_time_limit =max(0, self.timeLimit - self.timeChange-10)
@@ -157,7 +154,6 @@ class Game(object):
 
             cx = surface.get_width() // 2
 
-            # INFO TEXT
             timeText = self.font.render(
                 f"Time Taken: {round(self.timeTaken,1)}",
                 True,(255,255,255)
