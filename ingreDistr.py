@@ -60,6 +60,7 @@ class IngredientDistribution(object):
 
 
     def make_grey(self, image):
+        # Create a grey copy of the image 
         grey = image.copy()
         arr = pygame.surfarray.pixels3d(grey)
         avg = arr.mean(axis=2, keepdims=True)
@@ -144,6 +145,7 @@ class IngredientDistribution(object):
         padding = 10
         x_offset = RESOLUTION[0] - padding
 
+        # Draw collected ingredients in the top right corner
         for ing in reversed(self.ingredients):
 
             icon = ing["image"] if ing["collected"] else ing["grey"]
@@ -181,6 +183,7 @@ class IngredientDistribution(object):
 
         dist = self.engine.nearest_distance
 
+        # Show distance to nearest ingredient
         if dist is not None:
             feet = round(dist / 20)
             text = self.font.render(
@@ -194,6 +197,7 @@ class IngredientDistribution(object):
 
         self.engine.draw(surface)
 
+        # flash effect 
         if self.engine.flash_timer > 0:            
             flash = pygame.Surface((RESOLUTION[0], RESOLUTION[1]))
             flash.fill((255,255,200))
@@ -208,6 +212,7 @@ class IngredientDistribution(object):
             surface.blit(flash, (0,0))
 
 
+        # Draw gadget charges
         for i in range(self.engine.gadget_charges):
             x = 10 + i * 40
             y = 50
