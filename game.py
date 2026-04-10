@@ -45,12 +45,14 @@ class Game(object):
 
     def handleEvent(self, event):
 
+        # If we're on the end screen, only handle button clicks
         if self.endScreen:
 
             if event.type == pygame.MOUSEBUTTONDOWN:
 
                 mouse = vec(*event.pos) // SCALE
 
+                
                 if self.result == "fail":
 
                     if self.buttons["replay"].collidepoint(mouse):
@@ -98,6 +100,7 @@ class Game(object):
 
         self.timeLeft -= seconds
 
+        #Determine whether it was success or not when time runs out
         if self.timeLeft <= 0:
 
             self.timeLeft = 0
@@ -116,6 +119,8 @@ class Game(object):
             return
 
         self.state.update(seconds)
+
+        #Determine whether it was success or not when all ingredients are collected
 
         if all(ing["collected"] for ing in self.state.ingredients):
 
@@ -136,6 +141,7 @@ class Game(object):
 
         if not self.endScreen:
 
+            
             self.state.draw(surface)
 
             timerText = self.font.render(
@@ -147,6 +153,7 @@ class Game(object):
             surface.blit(timerText, (10,10))
 
         else:
+            #Displays end screen with results and buttons to replay, continue or go to menu
 
             overlay = pygame.Surface(surface.get_size(), pygame.SRCALPHA)
             overlay.fill((0,0,0,180))
