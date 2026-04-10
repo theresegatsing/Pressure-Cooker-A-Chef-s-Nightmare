@@ -43,6 +43,7 @@ class GameEngine(object):
         self.gadget_charges = 0
         self.max_charges = 3
 
+        # gadget settings
         self.gadget_active = False
         self.gadget_timer = 0
         self.gadget_duration = 7
@@ -55,6 +56,8 @@ class GameEngine(object):
         
         self.chef.draw(drawSurface)
         self.orbs.draw(drawSurface)
+
+        # draws glow if gadget is active
         if self.gadget_active:
             glow = pygame.Surface(self.chef.getSize(), pygame.SRCALPHA)
             glow.fill((100, 100, 255, 80))
@@ -80,17 +83,21 @@ class GameEngine(object):
         self.chef.update(seconds)
         self.orbs.update(seconds, self.chef)
 
+        # cooldown for goblin hits, prevents multiple hits in quick succession
         if self.goblin_hit_cooldown > 0:
             self.goblin_hit_cooldown -= seconds
         orbs_to_remove = []
 
         hit_occurred = False  
 
+        
+        # check for collisions between chef and orbs
         for i, orb in enumerate(self.orbs.orbs):
 
             if hit_occurred:
                 break 
-
+            
+        
             if self.chef.getCollisionRect().colliderect(orb.getCollisionRect()):
 
                 if self.goblin_hit_cooldown <= 0 and not self.gadget_active:
@@ -116,26 +123,33 @@ class GameEngine(object):
 
                     hit_occurred = True  
 
-      
+
+        
         if self.flash_timer > 0:
             self.flash_timer -= seconds
         
+        # damage flash timer for when hit by goblin
         if self.damage_flash_timer > 0:
             self.damage_flash_timer -= seconds
 
+        # animate chef if moving, reset to first frame if stopped
         if magnitude(self.chef.velocity) > 0:
             self.chef.animate = True
         else:
             self.chef.animate = False
             self.chef.frame = 0
 
+
         curVelocity = self.chef.velocity
 
+        # recalculates nearest ingredient distance while chef is moving
         if magnitude(self.chef.velocity) > 0:
             self.nearest_distance = self.nearestIngredientDistance()
 
         
         self.prev_velocity = vec(curVelocity[0], curVelocity[1])
+
+        # keep chef within world bounds
 
         if self.chef.getPosition()[0] <= 0:
             self.chef.velocity[0] = 0
@@ -153,6 +167,7 @@ class GameEngine(object):
             self.chef.velocity[1]= 0
 
 
+        # check for collisions between chef and ingredients
         chefRect = self.chef.getCollisionRect()
         for ing in self.collidables:   
             if ing["collected"]:
@@ -209,6 +224,7 @@ class GameEngine(object):
 
         ratio = score / threshold
 
+        # determine gadget unlock stage based on score ratio
         new_stage = 0
         if ratio >= 1:
             new_stage = 3
@@ -223,13 +239,15 @@ class GameEngine(object):
             self.gadget_charges = min(self.gadget_charges + gained, self.max_charges)
             self.gadget_unlock_stage = new_stage
 
-
+        # update gadget timer and deactivate if time runs out
         if self.gadget_active:
             self.gadget_timer -= seconds
 
             if self.gadget_timer <= 0:
                 self.gadget_active = False
-                
+        
+
+        # update camera offset to center on chef, while keeping within world bounds
         Drawable.CAMERA_OFFSET = self.chef.getPosition() + self.chef.getSize() /2 -  RESOLUTION /2
 
         for i in range (2):
@@ -238,6 +256,7 @@ class GameEngine(object):
     
 
     def nearestIngredientDistance(self):
+        # calculates distance from chef to nearest uncollected ingredient
         chef_pos = self.chef.getPosition() + self.chef.getSize() / 2
         min_dist = float('inf')
         
