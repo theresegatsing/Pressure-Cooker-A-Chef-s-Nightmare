@@ -2,6 +2,8 @@ import pygame
 from card import Card
 
 class LevelCards(object):
+
+    # This class is responsible for storing the cards for each level
     def __init__(self):
         self.levelCards = {
             1: [Card("burgerCard.png", 2100), Card("hotdogCard.png", 2000), Card("ramenCard.png", 2300)],
