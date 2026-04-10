@@ -44,6 +44,7 @@ def main():
             if event.type == pygame.QUIT:
                 RUNNING = False
 
+            # Handle events based on the current state of the game
             if state == "selection":
                 result = selectionScreen.handleEvent(event)
 
@@ -64,7 +65,7 @@ def main():
             elif state == "game":
                 game.handleEvent(event)
 
-
+        # Update and draw based on the current state of the game
         if state == "selection":
             selectionScreen.draw(drawSurface)
 
