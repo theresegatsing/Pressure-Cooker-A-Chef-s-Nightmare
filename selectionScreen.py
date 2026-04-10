@@ -36,6 +36,7 @@ class SelectionScreen(object):
         self.position_cards_centered()
 
     
+    # positions the selected cards centered on the screen with even spacing
     def position_cards_centered(self):
         available_width = SCREEN_WIDTH - 2 * SIDE_MARGIN
         num_cards = len(self.selectedCards)
