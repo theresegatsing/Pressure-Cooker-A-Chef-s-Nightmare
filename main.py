@@ -77,22 +77,19 @@ def main():
                 pygame.mixer.music.stop()
 
                 if getattr(game, 'next_level', False):
-                    # Go back to selection screen for the next level
-                    print("CURRENT LEVEL:", game.level)
-                    
-                   
+                    # Go  to the selection screen of the next level
                     next_level = game.level + 1
 
-                    if next_level > 3:
+
+                    if next_level > 3: # wrap up after level 3 because it is the last one
                         next_level = 1
 
-                    selectionScreen = SelectionScreen(next_level)  # pass level to constructor
+                    selectionScreen = SelectionScreen(next_level)  
                     next_time_limit = game.next_time_limit
 
                     state = "selection"
                 else:
-                    # normal finish → go back to first level selection or menu
-                    selectionScreen = SelectionScreen(game.level)  # or keep same level
+                    selectionScreen = SelectionScreen(game.level)  
                     state = "selection"
                 
                 game = None
