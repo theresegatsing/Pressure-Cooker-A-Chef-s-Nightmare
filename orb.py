@@ -93,6 +93,7 @@ class Orbs(object):
             self.positions[i] += self.velocities[i] * seconds
             self.orbs[i].position = self.positions[i]
 
+            # bounce off walls
 
             if self.positions[i][0] <= 0:
                 self.velocities[i][0] = - self.velocities[i][0]
