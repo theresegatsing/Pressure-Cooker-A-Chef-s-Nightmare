@@ -5,7 +5,7 @@ Run the main.py file. The selection screen will appear. Click on a card to start
 
 ## Controls
 
--  Arrow keys / WASD: Move the chef
+-  Arrow keys : Move the chef
 -  Spacebar: Activate spatula (temporary immunity, limited uses)
 
 ## Gameplay
